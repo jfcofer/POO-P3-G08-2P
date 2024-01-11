@@ -14,7 +14,7 @@ import javafx.fxml.FXML;
  *
  * @author William
  */
-public class DetallesFeriaController implements Initializable {
+public class DetallesController implements Initializable {
 
     /**
      * Initializes the controller class.
