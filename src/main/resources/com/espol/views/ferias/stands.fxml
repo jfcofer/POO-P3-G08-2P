@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="455.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.poo.app.RegistrarFeriaController">
+<BorderPane prefHeight="455.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.StandsController">
    <top>
       <Label alignment="CENTER" text="Stands de la Feria" BorderPane.alignment="CENTER">
          <font>
@@ -33,7 +33,7 @@
                      <children>
                         <VBox alignment="CENTER" minWidth="500.0" spacing="5.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="90.0" spacing="15.0" VBox.vgrow="ALWAYS">
+                              <HBox fx:id="sec1HBox" alignment="CENTER_LEFT" prefHeight="90.0" spacing="15.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <Label text="Seccion 1">
                                        <font>
@@ -45,7 +45,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="90.0" spacing="15.0" VBox.vgrow="ALWAYS">
+                              <HBox fx:id="sec2HBox" alignment="CENTER_LEFT" prefHeight="90.0" spacing="15.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <Label text="Seccion 2">
                                        <font>
@@ -57,7 +57,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="90.0" spacing="15.0" VBox.vgrow="ALWAYS">
+                              <HBox fx:id="sec3HBox" alignment="CENTER_LEFT" prefHeight="90.0" spacing="15.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <Label text="Seccion 3">
                                        <font>
@@ -69,7 +69,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="90.0" spacing="15.0" VBox.vgrow="ALWAYS">
+                              <HBox fx:id="sec4HBox" alignment="CENTER_LEFT" prefHeight="90.0" spacing="15.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <Label text="Seccion 4">
                                        <font>
@@ -91,7 +91,7 @@
                               <Insets left="10.0" />
                            </padding>
                            <children>
-                              <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Da clic en algun stand para ver su informacion" VBox.vgrow="ALWAYS" />
+                              <TextArea fx:id="infoTxtArea" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Da clic en algun stand para ver su informacion" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                      </children>

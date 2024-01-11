@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane prefHeight="450.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.poo.app.RegistrarFeriaController">
+<fx:root prefHeight="450.0" prefWidth="550.0" type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.RegistrarController">
    <top>
       <Label alignment="CENTER" text="Registrar Feria" BorderPane.alignment="CENTER">
          <font>
@@ -28,7 +27,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label text="Nombre" />
-                  <TextField alignment="CENTER">
+                  <TextField fx:id="nameTxtField" alignment="CENTER">
                      <VBox.margin>
                         <Insets left="75.0" right="75.0" top="3.0" />
                      </VBox.margin>
@@ -38,7 +37,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label text="Descripción" />
-                  <TextField alignment="CENTER">
+                  <TextField fx:id="descTxtField" alignment="CENTER">
                      <VBox.margin>
                         <Insets left="75.0" right="75.0" top="3.0" />
                      </VBox.margin>
@@ -51,7 +50,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label text="Lugar" />
-                  <TextField alignment="CENTER">
+                  <TextField fx:id="lugarTxtField" alignment="CENTER">
                      <VBox.margin>
                         <Insets left="75.0" right="75.0" top="3.0" />
                      </VBox.margin>
@@ -64,7 +63,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label text="Fecha de inicio" />
-                  <DatePicker>
+                  <DatePicker fx:id="inicioDate">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -80,7 +79,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label text="Fecha de finalización" />
-                  <DatePicker>
+                  <DatePicker fx:id="finDate">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -96,7 +95,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label text="Horario (formato 24h, hh:mm-hh:mm)" />
-                  <TextField alignment="CENTER">
+                  <TextField fx:id="horarioTxtField" alignment="CENTER">
                      <VBox.margin>
                         <Insets left="75.0" right="75.0" top="3.0" />
                      </VBox.margin>
@@ -114,25 +113,25 @@
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label text="Seccion 1" />
-                              <TextField alignment="CENTER" />
+                              <TextField fx:id="numSec1TxtField" alignment="CENTER" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label text="Seccion 2" />
-                              <TextField alignment="CENTER" />
+                              <TextField fx:id="numSec2TxtField" alignment="CENTER" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label text="Seccion 3" />
-                              <TextField alignment="CENTER" />
+                              <TextField fx:id="numSec3TxtField" alignment="CENTER" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <Label text="Seccion 4" />
-                              <TextField alignment="CENTER" />
+                              <TextField fx:id="numSec4TxtField" alignment="CENTER" />
                            </children>
                         </VBox>
                      </children>
@@ -147,8 +146,8 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="Registrar" />
-                  <Button mnemonicParsing="false" text="Regresar">
+                  <Button fx:id="registerButton" mnemonicParsing="false" text="Registrar" />
+                  <Button fx:id="backButton" mnemonicParsing="false" text="Regresar">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
@@ -164,4 +163,4 @@
          </BorderPane.margin>
       </VBox>
    </center>
-</BorderPane>
+</fx:root>

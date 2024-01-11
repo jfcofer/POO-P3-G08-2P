@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="455.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espol.poo.app.RegistrarFeriaController">
+<BorderPane prefHeight="455.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.auspiciantes.TablaController">
    <top>
       <Label alignment="CENTER" text="Auspiciantes" BorderPane.alignment="CENTER">
          <font>
@@ -27,7 +27,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
          <children>
-            <TableView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tabla" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Cedula" />
                   <TableColumn editable="false" prefWidth="100.0" text="Nombre" />
@@ -45,9 +45,9 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="645.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Volver al Menu Principal" />
-            <Button mnemonicParsing="false" text="Registrar Auspiciante" />
-            <Button mnemonicParsing="false" text="Asignar a Feria" />
+            <Button fx:id="backButton" mnemonicParsing="false" text="Volver al Menu Principal" />
+            <Button fx:id="registerButton" mnemonicParsing="false" text="Registrar Auspiciante" />
+            <Button fx:id="asignarFeriaButton" mnemonicParsing="false" text="Asignar a Feria" />
          </children>
          <padding>
             <Insets bottom="5.0" />
