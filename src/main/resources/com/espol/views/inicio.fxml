@@ -5,11 +5,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.AuspiciantesController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.InicioController">
     <children>
       <BorderPane prefHeight="530.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -23,27 +22,33 @@
             </Label>
          </top>
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </BorderPane.margin>
                <children>
-                  <Pane prefHeight="350.0" prefWidth="580.0">
-                     <children>
-                        <Label alignment="CENTER" layoutX="93.0" layoutY="14.0" text="Bienvenido al sistema de gestión de ferias">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="btnAdministrarEmprendedores" alignment="CENTER" layoutX="190.0" layoutY="141.0" mnemonicParsing="false" text="Administración de Emprendedores" />
-                        <Button fx:id="btnAdministrarFeria" alignment="CENTER" layoutX="217.0" layoutY="111.0" mnemonicParsing="false" text="Administración de Ferias" />
-                        <Button fx:id="btnAdministrarAuspiciantes" alignment="CENTER" layoutX="199.0" layoutY="171.0" mnemonicParsing="false" text="Administración de Auspiciantes" />
-                        <Button fx:id="btnAdministrarStands" alignment="CENTER" layoutX="215.0" layoutY="201.0" mnemonicParsing="false" text="Administración de Stands" />
-                        <Button fx:id="btnSalir" alignment="CENTER" contentDisplay="CENTER" layoutX="271.0" layoutY="301.0" mnemonicParsing="false" text="Salir" />
-                     </children></Pane>
+                  <Label alignment="CENTER" text="Bienvenido al sistema de gestión de ferias">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button fx:id="btnAdministrarEmprendedores" alignment="CENTER" mnemonicParsing="false" prefWidth="220.0" text="Administración de Emprendedores" />
+                  <Button fx:id="btnAdministrarFeria" alignment="CENTER" mnemonicParsing="false" prefWidth="220.0" text="Administración de Ferias" />
+                  <Button fx:id="btnAdministrarAuspiciantes" alignment="CENTER" mnemonicParsing="false" prefWidth="220.0" text="Administración de Auspiciantes" />
+                  <Button fx:id="btnAdministrarStands" alignment="CENTER" mnemonicParsing="false" prefWidth="220.0" text="Administración de Stands" />
                </children>
             </VBox>
          </center>
+         <bottom>
+            <Button fx:id="btnSalir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Salir" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>
