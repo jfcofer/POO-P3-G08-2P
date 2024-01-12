@@ -10,10 +10,18 @@
         <maven.compiler.target>21</maven.compiler.target>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx</artifactId>
+            <version>22-ea+16</version>
+            <type>pom</type>
+        </dependency>
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>13</version>
+            <version>22-ea+16</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
