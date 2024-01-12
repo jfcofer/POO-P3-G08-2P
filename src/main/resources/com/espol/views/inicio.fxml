@@ -43,7 +43,7 @@
             </VBox>
          </center>
          <bottom>
-            <Button fx:id="btnSalir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Salir" BorderPane.alignment="CENTER">
+            <Button fx:id="btnSalir" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleCloseButtonAction" text="Salir" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets bottom="10.0" />
                </BorderPane.margin>
