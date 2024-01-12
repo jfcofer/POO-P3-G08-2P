@@ -1,5 +1,7 @@
 package com.espol.controllers;
 
+import com.espol.App;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,4 +29,10 @@ public class InicioController {
         Stage stage = (Stage) btnSalir.getScene().getWindow();
         stage.close();
     }
+
+    @FXML
+    public void handleAuspiciantesButton(ActionEvent event){
+        App.setScreen("auspiciantes/tabla");
+    }
+
 }

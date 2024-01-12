@@ -27,12 +27,24 @@ public class App extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/"+fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/" + fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static void setScreen(String fxml) {
+        try {
+            App.setRoot(fxml);
+        } catch (IOException e) {
+            try {
+                App.setRoot("error");
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
 }

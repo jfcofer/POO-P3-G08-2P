@@ -37,7 +37,7 @@
                   </Label>
                   <Button fx:id="btnAdministrarEmprendedores" alignment="CENTER" mnemonicParsing="false" prefWidth="220.0" text="Administración de Emprendedores" />
                   <Button fx:id="btnAdministrarFeria" alignment="CENTER" mnemonicParsing="false" prefWidth="220.0" text="Administración de Ferias" />
-                  <Button fx:id="btnAdministrarAuspiciantes" alignment="CENTER" mnemonicParsing="false" prefWidth="220.0" text="Administración de Auspiciantes" />
+                  <Button fx:id="btnAdministrarAuspiciantes" alignment="CENTER" mnemonicParsing="false" onAction="#handleAuspiciantesButton" prefWidth="220.0" text="Administración de Auspiciantes" />
                   <Button fx:id="btnAdministrarStands" alignment="CENTER" mnemonicParsing="false" prefWidth="220.0" text="Administración de Stands" />
                </children>
             </VBox>
