@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="450.0" prefWidth="550.0" type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.RegistrarController">
+<BorderPane prefHeight="450.0" prefWidth="550.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.RegistrarController">
    <top>
       <Label alignment="CENTER" text="Registrar Feria" BorderPane.alignment="CENTER">
          <font>
@@ -163,4 +163,4 @@
          </BorderPane.margin>
       </VBox>
    </center>
-</fx:root>
+</BorderPane>

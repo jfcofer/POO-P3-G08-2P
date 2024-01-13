@@ -42,6 +42,7 @@ public class App extends Application {
         try {
             root = loadFXML(fxml);
         } catch (IOException e) {
+            e.printStackTrace();
             try {
                 root = loadFXML("error");
             } catch (IOException e1) {
