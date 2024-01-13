@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="455.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.TablaController">
+<BorderPane prefHeight="455.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.TablaController">
    <top>
       <Label alignment="CENTER" text="Ferias" BorderPane.alignment="CENTER">
          <font>
@@ -47,7 +47,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="645.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="backButton" mnemonicParsing="false" text="Volver al Menu Principal" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Volver al Menu Principal" />
             <Button fx:id="nuevaFeriaButton" mnemonicParsing="false" text="Nueva Feria" />
          </children>
          <padding>

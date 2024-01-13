@@ -25,7 +25,7 @@ public class TablaController {
 
     @FXML
     public void handleBackButtonAction(ActionEvent event){
-        App.setScreen("inicio");
+        App.setScreen("inicio", event);
     }
 
 }

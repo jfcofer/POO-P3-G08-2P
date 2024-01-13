@@ -1,5 +1,8 @@
 package com.espol.controllers.stands;
 
+import com.espol.App;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -24,5 +27,10 @@ public class TablaController {
 
     @FXML
     private HBox sec4HBox;
+
+    @FXML
+    public void handleBackButtonAction(ActionEvent event) {
+        App.setScreen("inicio", event);
+    }
 
 }

@@ -104,7 +104,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="645.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="backButton" mnemonicParsing="false" text="Volver al Menu Principal" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Volver al Menu Principal" />
          </children>
          <padding>
             <Insets bottom="5.0" />

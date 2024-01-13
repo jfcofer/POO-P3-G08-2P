@@ -1,7 +1,9 @@
 package com.espol;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -17,7 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("inicio"), 640, 480);
+        scene = new Scene(loadFXML("inicio"), 700, 480);
         stage.setScene(scene);
         stage.show();
     }
@@ -35,16 +37,20 @@ public class App extends Application {
         launch();
     }
 
-    public static void setScreen(String fxml) {
+    public static void setScreen(String fxml, ActionEvent event) {
+        Parent root = null;
         try {
-            App.setRoot(fxml);
+            root = loadFXML(fxml);
         } catch (IOException e) {
             try {
-                App.setRoot("error");
+                root = loadFXML("error");
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
     }
 
 }
