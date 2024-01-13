@@ -4,23 +4,21 @@
  */
 package com.espol.controllers.ferias;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
 
 /**
  * FXML Controller class
  *
  * @author William
  */
-public class EmprendedoresController implements Initializable {
+public class EmprendedoresController {
 
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    @FXML
+    public void initialize() {
+
+    }
+
 }

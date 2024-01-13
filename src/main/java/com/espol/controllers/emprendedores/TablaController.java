@@ -23,4 +23,9 @@ public class TablaController {
         App.setScreen("inicio", event);
     }
 
+    @FXML
+    public void handleRegisterButtonAction(ActionEvent event) {
+        App.setScreen("emprendedores/registrar", event);
+    }
+
 }

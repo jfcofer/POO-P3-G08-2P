@@ -23,4 +23,13 @@ public class TablaController {
         App.setScreen("inicio", event);
     }
 
+    @FXML
+    public void handleNuevaFeriaButtonAction(ActionEvent event) {
+        App.setScreen("ferias/registrar", event);
+    }
+
+    @FXML
+    public void initialize() {
+
+    }
 }

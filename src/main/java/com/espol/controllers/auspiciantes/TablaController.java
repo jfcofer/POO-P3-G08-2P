@@ -1,7 +1,5 @@
 package com.espol.controllers.auspiciantes;
 
-import java.io.IOException;
-
 import com.espol.App;
 
 import javafx.event.ActionEvent;
@@ -24,8 +22,18 @@ public class TablaController {
     private TableView<?> tabla;
 
     @FXML
-    public void handleBackButtonAction(ActionEvent event){
+    public void handleBackButtonAction(ActionEvent event) {
         App.setScreen("inicio", event);
+    }
+
+    @FXML
+    public void handleRegisterButtonAction(ActionEvent event) {
+        App.setScreen("auspiciantes/registrar", event);
+    }
+
+    @FXML
+    public void handleAsignarFeriaButtonAction(ActionEvent event) {
+        App.setScreen("auspiciantes/asignar", event);
     }
 
 }

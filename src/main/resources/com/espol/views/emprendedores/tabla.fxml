@@ -46,7 +46,7 @@
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="645.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Volver al Menu Principal" />
-            <Button fx:id="registerButton" mnemonicParsing="false" text="Registrar Emprendedor" />
+            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#handleRegisterButtonAction" text="Registrar Emprendedor" />
          </children>
          <padding>
             <Insets bottom="5.0" />
