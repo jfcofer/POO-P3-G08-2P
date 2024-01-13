@@ -11,6 +11,7 @@ public class Auspiciante extends Persona {
     super(ruc, nombre, telefono, email, direccion, sitioWeb, personaResponsable);
     this.lstSectores = new ArrayList<Sectores>();
   }
+  
 
   public String toString() {
     return super.toString() + "\nSectores: " + lstSectores;
