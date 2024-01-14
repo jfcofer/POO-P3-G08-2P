@@ -1,13 +1,11 @@
 package com.espol.models;
 
-import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
-
-import com.espol.App;
 
 public class Datos {
     ArrayList<Auspiciante> auspiciantes;
@@ -28,28 +26,29 @@ public class Datos {
         }
     }
 
-    public static Datos leerArchvo(){
+    public static Datos leerArchivo() {
         Datos datos = null;
-        try(ObjectInputStream objIn = new ObjectInputStream(new FileInputStream("archives/datos.dat"))){
+        try (ObjectInputStream objIn = new ObjectInputStream(new FileInputStream("archives/datos.dat"))) {
             datos = (Datos) objIn.readObject();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        return datos;
 
     }
 
-    public static Datos defaultDatos(){
-        ArrayList<Auspiciantes> auspiciantes = new ArrayList<>();
-        agregarAuspiciantes(auspiciantes);
-        ArrayList<Emprendedores> emprendedores = new ArrayList<>();
-        agregarEmprendedores(emprendedores);
+    public static Datos defaultDatos() {
+        ArrayList<Auspiciante> auspiciantes = new ArrayList<>();
+        Datos.agregarAuspiciantes(auspiciantes);
+        ArrayList<Emprendedor> emprendedores = new ArrayList<>();
+        Datos.agregarEmprendedores(emprendedores);
         ArrayList<Feria> ferias = new ArrayList<>();
-        agregarFerias(ferias);
+        Datos.agregarFerias(ferias, auspiciantes);
         return new Datos(auspiciantes, emprendedores, ferias);
 
     }
 
-    public static void agregarEmprendedores(ArrayList<Emprendedores> listaEmprendedores) {
+    public static void agregarEmprendedores(ArrayList<Emprendedor> listaEmprendedores) {
         listaEmprendedores.add(new Emprendedor("1798285937001", "Tienda de Pepe", "0948652474", "tpepe@gmail.com",
                 "Urbanización Los Dos Caminos", "www.tiendapepe.com.ec", "Pepe", "Venta de articulos varios"));
         listaEmprendedores.get(0).agregarRedSocial("Twitter", "Pepe", "www.Twitter/pepe");
@@ -80,13 +79,12 @@ public class Datos {
         listaAuspiciantes.get(0).agregarSectores(3);
     }
 
-    public static void agregarFerias(Arrayist<Feria> listaFerias) {
-        Feria feria = new Feria(App.listaFerias.size() + 1, "Feria de Navidad",
+    public static void agregarFerias(ArrayList<Feria> listaFerias, ArrayList<Auspiciante> listaAuspiciantes) {
+        Feria feria = new Feria(0, "Feria de Navidad",
                 "Decoraciones para tu casa en tiempos de Navidad", "Ceibos", "2024-10-20", "2024-12-20", "9:00-20:00");
         feria.asignarNumeroStands(1, 1, 1, 1);
         feria.asignarAuspiciante(listaAuspiciantes.get(0), "Gorros de Navidad", true);
         listaFerias.add(feria);
     }
-
 
 }
