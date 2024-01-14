@@ -7,18 +7,23 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import com.espol.models.Datos;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-
+    public static Datos datos;
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
+        datos = Datos.leerArchivo();
+        if (datos==null){
+            datos = Datos.defaultDatos();
+        }
+        Datos.generarArchivo(datos);
         scene = new Scene(loadFXML("inicio"), 700, 480);
         stage.setScene(scene);
         stage.show();

@@ -36,4 +36,9 @@ public class TablaController {
         App.setScreen("auspiciantes/asignar", event);
     }
 
+    @FXML
+    public void initialize(){
+    
+    }
+
 }
