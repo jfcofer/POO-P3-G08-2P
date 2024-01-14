@@ -1,5 +1,7 @@
 package com.espol.controllers.ferias;
 
+import com.espol.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -42,5 +44,10 @@ public class RegistrarController {
 
     @FXML
     private Button registerButton;
+
+    @FXML
+    private void handleBackButtonAction(ActionEvent event) {
+        App.setScreen("ferias/tabla", event);
+    }
 
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="450.0" prefWidth="550.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.RegistrarController">
+<BorderPane prefHeight="450.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.RegistrarController">
    <top>
       <Label alignment="CENTER" text="Registrar Feria" BorderPane.alignment="CENTER">
          <font>
@@ -147,7 +147,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button fx:id="registerButton" mnemonicParsing="false" text="Registrar" />
-                  <Button fx:id="backButton" mnemonicParsing="false" text="Regresar">
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Regresar">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>

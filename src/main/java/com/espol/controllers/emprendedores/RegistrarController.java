@@ -4,7 +4,10 @@
  */
 package com.espol.controllers.emprendedores;
 
+import com.espol.App;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
@@ -13,12 +16,19 @@ import javafx.fxml.FXML;
  */
 public class RegistrarController {
 
+    @FXML
+    private Button btnRegresar;
+
     /**
      * Initializes the controller class.
      */
-    @FXML
     public void initialize() {
 
+    }
+
+    @FXML
+    private void handleBackButtonAction(ActionEvent event) {
+        App.setScreen("emprendedores/tabla", event);
     }
 
 }
