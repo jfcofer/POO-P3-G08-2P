@@ -1,13 +1,15 @@
 package com.espol.models;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Datos {
+public class Datos implements Serializable {
     ArrayList<Auspiciante> auspiciantes;
     ArrayList<Emprendedor> emprendedores;
     ArrayList<Feria> ferias;
@@ -29,8 +31,13 @@ public class Datos {
     public static Datos leerArchivo() {
         Datos datos = null;
         try (ObjectInputStream objIn = new ObjectInputStream(new FileInputStream("archives/datos.dat"))) {
-            datos = (Datos) objIn.readObject();
-        } catch (Exception e) {
+            while (objIn.available() > 0) {
+                datos = (Datos) objIn.readObject();
+            }
+        } catch (EOFException e) {
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return datos;

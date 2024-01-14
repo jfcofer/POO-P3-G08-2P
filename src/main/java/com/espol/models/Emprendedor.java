@@ -1,6 +1,7 @@
 package com.espol.models;
 
-public class Emprendedor extends Persona {
+
+public class Emprendedor extends Persona  {
   private String descripcionServicios;
 
   public Emprendedor(String ruc, String nombre, String telefono, String email, String direccion, String sitioWeb,

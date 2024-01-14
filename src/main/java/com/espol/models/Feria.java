@@ -1,9 +1,10 @@
 package com.espol.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Feria {
+public class Feria implements Serializable {
     private int codigo;
     private String nombre;
     private String descripcion;

@@ -1,8 +1,9 @@
 package com.espol.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Stand {
+public class Stand implements Serializable {
   private String codigo;
   private LocalDate fechaAsignacion;
   private Persona personaAsignada;

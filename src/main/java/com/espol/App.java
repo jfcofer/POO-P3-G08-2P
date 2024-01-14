@@ -22,8 +22,8 @@ public class App extends Application {
         datos = Datos.leerArchivo();
         if (datos==null){
             datos = Datos.defaultDatos();
+            Datos.generarArchivo(datos);
         }
-        Datos.generarArchivo(datos);
         scene = new Scene(loadFXML("inicio"), 700, 480);
         stage.setScene(scene);
         stage.show();

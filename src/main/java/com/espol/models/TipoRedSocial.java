@@ -1,5 +1,6 @@
 package com.espol.models;
 
+
 public enum TipoRedSocial {
     // Parametros
     Twitter,

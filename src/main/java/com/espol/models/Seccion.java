@@ -1,8 +1,9 @@
 package com.espol.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Seccion {
+public class Seccion implements Serializable{
   private int id;
   private ArrayList<Stand> lstStands;
 
