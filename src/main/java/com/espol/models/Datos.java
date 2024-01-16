@@ -52,7 +52,6 @@ public class Datos implements Serializable {
         ArrayList<Feria> ferias = new ArrayList<>();
         Datos.agregarFerias(ferias, auspiciantes);
         return new Datos(auspiciantes, emprendedores, ferias);
-
     }
 
     public static void agregarEmprendedores(ArrayList<Emprendedor> listaEmprendedores) {
@@ -93,5 +92,8 @@ public class Datos implements Serializable {
         feria.asignarAuspiciante(listaAuspiciantes.get(0), "Gorros de Navidad", true);
         listaFerias.add(feria);
     }
-
+    
+    public ArrayList<Auspiciante> getListaAuspiciantes(){
+        return this.auspiciantes;
+    }
 }
