@@ -146,12 +146,15 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="registerButton" mnemonicParsing="false" text="Registrar" />
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Regresar">
                      <HBox.margin>
-                        <Insets left="50.0" />
+                        <Insets />
                      </HBox.margin>
                   </Button>
+                  <Button fx:id="registerButton" mnemonicParsing="false" text="Registrar">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin></Button>
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" top="25.0" />

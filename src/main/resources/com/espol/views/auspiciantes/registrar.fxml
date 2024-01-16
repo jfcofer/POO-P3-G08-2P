@@ -382,14 +382,14 @@
          <bottom>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#handleRegistrarAuspicianteButtonAction" text="Registrar">
+                  <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Regresar">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Regresar">
+                  <Button fx:id="btnRegistrar" mnemonicParsing="false" onAction="#handleRegistrarAuspicianteButtonAction" text="Registrar">
                      <HBox.margin>
-                        <Insets left="20.0" />
+                        <Insets left="50.0" />
                      </HBox.margin>
                   </Button>
                </children>
