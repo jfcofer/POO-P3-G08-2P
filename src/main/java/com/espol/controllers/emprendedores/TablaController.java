@@ -1,11 +1,17 @@
 package com.espol.controllers.emprendedores;
 
 import com.espol.App;
+import com.espol.models.*;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TablaController {
 
@@ -14,9 +20,17 @@ public class TablaController {
 
     @FXML
     private Button registerButton;
-
+    
     @FXML
-    private TableView<?> tabla;
+    private TableView<Emprendedor> tabla;
+    @FXML
+    private TableColumn columnaCedula;
+    @FXML
+    private TableColumn columnaNombre;
+    @FXML
+    private TableColumn columnaTelefono;
+    @FXML
+    private TableColumn columnaEmail;
 
     @FXML
     public void handleBackButtonAction(ActionEvent event) {
@@ -26,6 +40,24 @@ public class TablaController {
     @FXML
     public void handleRegisterButtonAction(ActionEvent event) {
         App.setScreen("emprendedores/registrar", event);
+    }
+    
+    @FXML
+    public void initialize(){
+        ArrayList<Emprendedor> emprendedores = App.datos.getEmprendedores();
+        
+        // Definir cómo se llenarán las columnas
+        columnaCedula.setCellValueFactory(new PropertyValueFactory<>("ruc"));
+        columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        columnaTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+        columnaEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+
+        // Convertir la lista de auspiciantes a una lista observable
+        ObservableList<Emprendedor> listaObservable = FXCollections.observableArrayList(emprendedores);
+
+        // Añadir los datos a la tabla
+        tabla.setItems(listaObservable);
     }
 
 }
