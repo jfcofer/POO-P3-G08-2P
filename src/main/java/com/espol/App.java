@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+
 import com.espol.models.Datos;
 
 /**
@@ -38,6 +39,11 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
+    public static FXMLLoader getLoader(String fxml) {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/" + fxml + ".fxml"));
+        return fxmlLoader;
+    }
+
     public static void main(String[] args) {
         launch();
     }
@@ -58,5 +64,6 @@ public class App extends Application {
         scene = new Scene(root);
         stage.setScene(scene);
     }
+
 
 }

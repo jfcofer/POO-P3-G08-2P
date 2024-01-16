@@ -24,13 +24,13 @@ public class TablaController {
     @FXML
     private TableView<Emprendedor> tabla;
     @FXML
-    private TableColumn columnaCedula;
+    private TableColumn<Emprendedor, String> columnaCedula;
     @FXML
-    private TableColumn columnaNombre;
+    private TableColumn<Emprendedor,String> columnaNombre;
     @FXML
-    private TableColumn columnaTelefono;
+    private TableColumn<Emprendedor,String> columnaTelefono;
     @FXML
-    private TableColumn columnaEmail;
+    private TableColumn<Emprendedor,String> columnaEmail;
 
     @FXML
     public void handleBackButtonAction(ActionEvent event) {

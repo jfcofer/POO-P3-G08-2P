@@ -133,7 +133,7 @@ public class Feria implements Serializable {
         StringBuilder str = new StringBuilder();
         for (Seccion seccion : secciones) {
             str.append("\nSeccion " + seccion.getId() + "\n");
-            for (Stand stand : seccion.getLstStands()) {
+            for (Stand stand : seccion.getStands()) {
                 String mensaje = (stand.getPersonaAsignada() != null) ? "*" : "";
                 str.append("[" + stand.getCodigo() + mensaje + "]");
             }
@@ -151,7 +151,7 @@ public class Feria implements Serializable {
 
     public void reservarStand(String codigoStand, Persona persona, LocalDate date) {
         for (Seccion seccion : secciones) {
-            for (Stand stand : seccion.getLstStands()) {
+            for (Stand stand : seccion.getStands()) {
                 if (stand.getCodigo().equals(codigoStand)) {
                     stand.setFechaAsignacion(date);
                     stand.setPersonaAsignada(persona);
@@ -172,7 +172,7 @@ public class Feria implements Serializable {
 
     public String informacionStand(String codigoStand) {
         for (Seccion seccion : this.secciones) {
-            for (Stand stand : seccion.getLstStands()) {
+            for (Stand stand : seccion.getStands()) {
                 if (stand.getCodigo().equals(codigoStand)) {
                     return stand.toString();
                 }
