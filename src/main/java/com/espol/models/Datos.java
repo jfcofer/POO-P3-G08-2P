@@ -44,17 +44,18 @@ public class Datos implements Serializable {
         this.ferias = ferias;
     }
 
-    public static void generarArchivo(Datos datos) {
-        try (ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream("archives/datos.dat"))) {
-            objOut.writeObject(datos);
+    public void generarArchivo() {
+        try (ObjectOutputStream objOut = new ObjectOutputStream(new FileOutputStream("./archives/datos.dat"))) {
+            objOut.writeObject(this);
         } catch (IOException e) {
+            System.out.println("Error al esribir archivo");
             e.printStackTrace();
         }
     }
 
     public static Datos leerArchivo() {
         Datos datos = null;
-        try (ObjectInputStream objIn = new ObjectInputStream(new FileInputStream("archives/datos.dat"))) {
+        try (ObjectInputStream objIn = new ObjectInputStream(new FileInputStream("./archives/datos.dat"))) {
             while (objIn.available() > 0) {
                 datos = (Datos) objIn.readObject();
             }
@@ -62,6 +63,7 @@ public class Datos implements Serializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            System.out.println("error al cargar archivo");
             e.printStackTrace();
         }
         return datos;
@@ -116,6 +118,5 @@ public class Datos implements Serializable {
         feria.asignarAuspiciante(listaAuspiciantes.get(0), "Gorros de Navidad", true);
         listaFerias.add(feria);
     }
-    
 
 }

@@ -22,5 +22,5 @@ public class AsignarController {
     private void handleBackButtonAction(ActionEvent event) {
         App.setScreen("auspiciantes/tabla", event);
     }
-    
+
 }

@@ -20,9 +20,9 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         datos = Datos.leerArchivo();
-        if (datos==null){
+        if (datos == null) {
             datos = Datos.defaultDatos();
-            Datos.generarArchivo(datos);
+            datos.generarArchivo();
         }
         scene = new Scene(loadFXML("inicio"), 700, 480);
         stage.setScene(scene);

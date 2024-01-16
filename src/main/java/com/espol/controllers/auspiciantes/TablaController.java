@@ -14,8 +14,6 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
-
-
 public class TablaController {
 
     @FXML
@@ -27,13 +25,13 @@ public class TablaController {
     @FXML
     private TableView<Auspiciante> tabla;
     @FXML
-    private TableColumn columnaCedula;
+    private TableColumn<Auspiciante, String> columnaCedula;
     @FXML
-    private TableColumn columnaNombre;
+    private TableColumn<Auspiciante, String> columnaNombre;
     @FXML
-    private TableColumn columnaTelefono;
+    private TableColumn<Auspiciante, String> columnaTelefono;
     @FXML
-    private TableColumn columnaEmail;
+    private TableColumn<Auspiciante, String> columnaEmail;
 
     @FXML
     public void handleBackButtonAction(ActionEvent event) {
@@ -51,15 +49,14 @@ public class TablaController {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         ArrayList<Auspiciante> auspiciantes = App.datos.getAuspiciantes();
-        
+
         // Definir cómo se llenarán las columnas
         columnaCedula.setCellValueFactory(new PropertyValueFactory<>("ruc"));
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         columnaTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         columnaEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-
 
         // Convertir la lista de auspiciantes a una lista observable
         ObservableList<Auspiciante> listaObservable = FXCollections.observableArrayList(auspiciantes);

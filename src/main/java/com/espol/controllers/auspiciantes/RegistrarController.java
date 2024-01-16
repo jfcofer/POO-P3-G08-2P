@@ -10,9 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import java.util.ArrayList;
 import com.espol.models.*;
-import com.espol.App;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TabPane;
 
@@ -103,25 +101,23 @@ public class RegistrarController {
                 return;
             }
         }
-        
+
         if (condicion == true || cedula.isBlank()) {
-            mostrarAlertaError("La cedula no puede quedar vacía o ya existe un auspiciante registrado con esa cédula o ruc");
-        } 
-        if(nombre.isBlank()) {
+            mostrarAlertaError(
+                    "La cedula no puede quedar vacía o ya existe un auspiciante registrado con esa cédula o ruc");
+        }
+        if (nombre.isBlank()) {
             mostrarAlertaError("El nombre no puede quedar vacía");
-        }
-        else if(responsable.isBlank()){
+        } else if (responsable.isBlank()) {
             mostrarAlertaError("El nombre de la persona responsable no puede quedar vacío");
-        }
-        else if(telefono.isBlank()){
+        } else if (telefono.isBlank()) {
             mostrarAlertaError("El número de teléfono no puede quedar vacío");
-        }
-        else if(email.isBlank()){
+        } else if (email.isBlank()) {
             mostrarAlertaError("El email no puede quedar vacío");
-        }
-        else{
+        } else {
             // Crear un nuevo objeto Auspiciante y agregarlo a la lista
-            Auspiciante nuevoAuspiciante = new Auspiciante(cedula, nombre, telefono, email, direccion, sitioWeb, responsable);
+            Auspiciante nuevoAuspiciante = new Auspiciante(cedula, nombre, telefono, email, direccion, sitioWeb,
+                    responsable);
 
             // Agregar los sectores cubiertos
             if (AlimentacionCheckBox.isSelected()) {
@@ -136,37 +132,44 @@ public class RegistrarController {
             if (VestimentaCheckBox.isSelected()) {
                 nuevoAuspiciante.agregarSectores(4);
             }
-            
-            if(nuevoAuspiciante.getLstTipoSectores().isEmpty()){
-                mostrarAlertaError("Debe seleccionar al menos un sector cubierto");
-            }
-            else {
 
-            // Agregar las redes , leyendo los text fields de cada campo
-            if (!UserTwitterTextField.getText().isEmpty()) {
-                nuevoAuspiciante.agregarRedSocial("Twitter", UserTwitterTextField.getText(), EmailTwitterTextField.getText());
-            }
-            if (!UserTiktokTextField.getText().isEmpty()) {
-                nuevoAuspiciante.agregarRedSocial("TikTok", UserTiktokTextField.getText(), EmailTiktokTextField.getText());
-            }
-            if (!UserFacebookTextField.getText().isEmpty()) {
-                nuevoAuspiciante.agregarRedSocial("Facebook", UserFacebookTextField.getText(), EmailFacebookTextField.getText());
-            }
-            if (!UserInstagramTextField.getText().isEmpty()) {
-                nuevoAuspiciante.agregarRedSocial("Instagram", UserInstagramTextField.getText(), EmailInstagramTextField.getText());
-            }
-            if (!UserYoutubeTextField.getText().isEmpty()) {
-                nuevoAuspiciante.agregarRedSocial("Youtube", UserYoutubeTextField.getText(), EmailYoutubeTextField.getText());
-            }
-            if (!UserLinkedinTextField.getText().isEmpty()) {
-                nuevoAuspiciante.agregarRedSocial("LinkedIn", UserLinkedinTextField.getText(), EmailLinkedinTextField.getText());
-            }
-            if (!UserPinterestTextField.getText().isEmpty()) {
-                nuevoAuspiciante.agregarRedSocial("Pinterest", UserPinterestTextField.getText(), EmailPinterestTextField.getText());
-            }
-            App.datos.getAuspiciantes().add(nuevoAuspiciante);
-            mostrarAlertaInfo("El registro se ha realizado correctamente");
-            App.setScreen("auspiciantes/tabla", event);
+            if (nuevoAuspiciante.getLstTipoSectores().isEmpty()) {
+                mostrarAlertaError("Debe seleccionar al menos un sector cubierto");
+            } else {
+
+                // Agregar las redes , leyendo los text fields de cada campo
+                if (!UserTwitterTextField.getText().isEmpty()) {
+                    nuevoAuspiciante.agregarRedSocial("Twitter", UserTwitterTextField.getText(),
+                            EmailTwitterTextField.getText());
+                }
+                if (!UserTiktokTextField.getText().isEmpty()) {
+                    nuevoAuspiciante.agregarRedSocial("TikTok", UserTiktokTextField.getText(),
+                            EmailTiktokTextField.getText());
+                }
+                if (!UserFacebookTextField.getText().isEmpty()) {
+                    nuevoAuspiciante.agregarRedSocial("Facebook", UserFacebookTextField.getText(),
+                            EmailFacebookTextField.getText());
+                }
+                if (!UserInstagramTextField.getText().isEmpty()) {
+                    nuevoAuspiciante.agregarRedSocial("Instagram", UserInstagramTextField.getText(),
+                            EmailInstagramTextField.getText());
+                }
+                if (!UserYoutubeTextField.getText().isEmpty()) {
+                    nuevoAuspiciante.agregarRedSocial("Youtube", UserYoutubeTextField.getText(),
+                            EmailYoutubeTextField.getText());
+                }
+                if (!UserLinkedinTextField.getText().isEmpty()) {
+                    nuevoAuspiciante.agregarRedSocial("LinkedIn", UserLinkedinTextField.getText(),
+                            EmailLinkedinTextField.getText());
+                }
+                if (!UserPinterestTextField.getText().isEmpty()) {
+                    nuevoAuspiciante.agregarRedSocial("Pinterest", UserPinterestTextField.getText(),
+                            EmailPinterestTextField.getText());
+                }
+                App.datos.getAuspiciantes().add(nuevoAuspiciante);
+                App.datos.generarArchivo();
+                mostrarAlertaInfo("El registro se ha realizado correctamente");
+                App.setScreen("auspiciantes/tabla", event);
             }
         }
 
@@ -182,7 +185,7 @@ public class RegistrarController {
     }
 
     @FXML
-    private void mostrarAlertaInfo(String mensaje){
+    private void mostrarAlertaInfo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.setTitle("Info");
