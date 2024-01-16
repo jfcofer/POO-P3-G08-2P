@@ -97,7 +97,7 @@ public class RegistrarController {
         Boolean condicion = false;
 
         // Verificar que no exista otro auspiciante con el mismo número de cédula o RUC
-        for (Auspiciante auspiciante : App.datos.getListaAuspiciantes()) {
+        for (Auspiciante auspiciante : App.datos.getAuspiciantes()) {
             if (auspiciante.getRuc().equals(cedula)) {
                 condicion = true;
                 return;
@@ -164,7 +164,7 @@ public class RegistrarController {
             if (!UserPinterestTextField.getText().isEmpty()) {
                 nuevoAuspiciante.agregarRedSocial("Pinterest", UserPinterestTextField.getText(), EmailPinterestTextField.getText());
             }
-            App.datos.getListaAuspiciantes().add(nuevoAuspiciante);
+            App.datos.getAuspiciantes().add(nuevoAuspiciante);
             mostrarAlertaInfo("El registro se ha realizado correctamente");
             App.setScreen("auspiciantes/tabla", event);
             }

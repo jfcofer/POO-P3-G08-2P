@@ -10,9 +10,33 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Datos implements Serializable {
-    ArrayList<Auspiciante> auspiciantes;
-    ArrayList<Emprendedor> emprendedores;
-    ArrayList<Feria> ferias;
+    private ArrayList<Auspiciante> auspiciantes;
+    private ArrayList<Emprendedor> emprendedores;
+    private ArrayList<Feria> ferias;
+
+    public ArrayList<Auspiciante> getAuspiciantes() {
+        return auspiciantes;
+    }
+
+    public void setAuspiciantes(ArrayList<Auspiciante> auspiciantes) {
+        this.auspiciantes = auspiciantes;
+    }
+
+    public ArrayList<Emprendedor> getEmprendedores() {
+        return emprendedores;
+    }
+
+    public void setEmprendedores(ArrayList<Emprendedor> emprendedores) {
+        this.emprendedores = emprendedores;
+    }
+
+    public ArrayList<Feria> getFerias() {
+        return ferias;
+    }
+
+    public void setFerias(ArrayList<Feria> ferias) {
+        this.ferias = ferias;
+    }
 
     public Datos(ArrayList<Auspiciante> auspiciantes, ArrayList<Emprendedor> emprendedores, ArrayList<Feria> ferias) {
         this.auspiciantes = auspiciantes;
@@ -93,7 +117,5 @@ public class Datos implements Serializable {
         listaFerias.add(feria);
     }
     
-    public ArrayList<Auspiciante> getListaAuspiciantes(){
-        return this.auspiciantes;
-    }
+
 }

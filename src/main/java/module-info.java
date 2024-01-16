@@ -3,6 +3,7 @@ module com.espol {
     requires javafx.controls;
     requires javafx.fxml;
 
+    opens com.espol.models to javafx.base;
     opens com.espol to javafx.fxml;
     opens com.espol.controllers to javafx.fxml;
     opens com.espol.controllers.auspiciantes to javafx.fxml;

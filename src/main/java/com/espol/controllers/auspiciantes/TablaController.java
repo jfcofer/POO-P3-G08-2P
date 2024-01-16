@@ -52,7 +52,7 @@ public class TablaController {
 
     @FXML
     public void initialize(){
-        ArrayList<Auspiciante> auspiciantes = App.datos.getListaAuspiciantes();
+        ArrayList<Auspiciante> auspiciantes = App.datos.getAuspiciantes();
         
         // Definir cómo se llenarán las columnas
         columnaCedula.setCellValueFactory(new PropertyValueFactory<>("ruc"));
