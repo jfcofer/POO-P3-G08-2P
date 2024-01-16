@@ -83,19 +83,21 @@ public class EditarController {
 
     private Auspiciante auspiciante;
 
-    public Auspiciante cargarAuspiciante(String ruc) {
-        for (Auspiciante a : App.datos.getAuspiciantes()) {
-            if (a.getRuc().equals(ruc)) {
-                auspiciante = a;
+    public void cargarAuspiciante(Auspiciante a) {
+        
+        for (Auspiciante b : App.datos.getAuspiciantes()) {
+            if (b.getRuc().equals(a.getRuc())) {
+                System.out.println(b);
+                initialize(b);
             }
         }
-        return auspiciante;
+        
     }
 
     @FXML
-    public void initialize(String ruc) {
+    public void initialize(Auspiciante auspiciante) {
+        CedulaTextField.setText(auspiciante.getRuc());
         
-
     }
 
     @FXML

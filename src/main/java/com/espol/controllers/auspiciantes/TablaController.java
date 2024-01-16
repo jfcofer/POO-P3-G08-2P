@@ -2,6 +2,7 @@ package com.espol.controllers.auspiciantes;
 
 import com.espol.App;
 import com.espol.models.*;
+import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +14,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
 
+
 import java.util.ArrayList;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableCell;
 
 public class TablaController {
@@ -76,6 +79,14 @@ public class TablaController {
                         } else {
                             btn.setOnAction((ActionEvent event) -> {
                                 Auspiciante auspiciante = getTableView().getItems().get(getIndex());
+                                FXMLLoader loader = App.getLoader("auspiciantes/editar");
+                                try {
+                                    loader.load();
+                                } catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
+                                EditarController controller=loader.getController();
+                                controller.cargarAuspiciante(auspiciante);
                                 App.setScreen("auspiciantes/editar", event);
                             });
                             setGraphic(btn);
