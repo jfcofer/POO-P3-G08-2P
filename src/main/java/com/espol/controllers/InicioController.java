@@ -46,6 +46,6 @@ public class InicioController {
 
     @FXML
     public void handleStandsButton(ActionEvent event) {
-        App.setScreen("stands/tabla", event);
+        App.setScreen("stands/codigoFeria", event);
     }
 }
