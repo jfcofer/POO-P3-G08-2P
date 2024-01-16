@@ -49,6 +49,8 @@ public class Datos implements Serializable {
             objOut.writeObject(this);
         } catch (IOException e) {
             System.out.println("Error al esribir archivo");
+
+            System.out.println(System.getProperty("user.dir"));
             e.printStackTrace();
         }
     }
