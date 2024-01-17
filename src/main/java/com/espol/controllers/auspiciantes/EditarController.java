@@ -81,22 +81,14 @@ public class EditarController {
     @FXML
     private TextField EmailTiktokTextField;
 
-    private Auspiciante auspiciante;
 
-    public void cargarAuspiciante(Auspiciante a) {
-        
-        for (Auspiciante b : App.datos.getAuspiciantes()) {
-            if (b.getRuc().equals(a.getRuc())) {
-                System.out.println(b);
-                initialize(b);
-            }
-        }
-        
+    public void cargarAuspiciante(String ruc) {
+        CedulaTextField.setText(ruc);
+
     }
 
     @FXML
-    public void initialize(Auspiciante auspiciante) {
-        CedulaTextField.setText(auspiciante.getRuc());
+    public void initialize() {
         
     }
 
