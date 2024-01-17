@@ -2,6 +2,7 @@ package com.espol.controllers.auspiciantes;
 
 import com.espol.App;
 import com.espol.models.*;
+import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,8 +12,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Callback;
+
 
 import java.util.ArrayList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TableCell;
 
 public class TablaController {
 
@@ -32,6 +37,8 @@ public class TablaController {
     private TableColumn<Auspiciante, String> columnaTelefono;
     @FXML
     private TableColumn<Auspiciante, String> columnaEmail;
+    @FXML
+    private TableColumn<Auspiciante, String> columnaOpciones;
 
     @FXML
     public void handleBackButtonAction(ActionEvent event) {
@@ -57,6 +64,37 @@ public class TablaController {
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         columnaTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         columnaEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        columnaOpciones.setCellFactory(new Callback<TableColumn<Auspiciante, String>, TableCell<Auspiciante, String>>() {
+            @Override
+            public TableCell<Auspiciante, String> call(TableColumn<Auspiciante, String> param) {
+                return new TableCell<Auspiciante, String>() {
+                    final Button btn = new Button("Editar");
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            btn.setOnAction((ActionEvent event) -> {
+                                Auspiciante auspiciante = getTableView().getItems().get(getIndex());
+                                FXMLLoader loader = App.getLoader("auspiciantes/editar");
+                                try {
+                                    loader.load();
+                                } catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
+                                EditarController controller=loader.getController();
+                                controller.cargarAuspiciante(auspiciante);
+                                App.setScreen("auspiciantes/editar", event);
+                            });
+                            setGraphic(btn);
+                        }
+                    }
+                };
+            }
+        });
 
         // Convertir la lista de auspiciantes a una lista observable
         ObservableList<Auspiciante> listaObservable = FXCollections.observableArrayList(auspiciantes);
