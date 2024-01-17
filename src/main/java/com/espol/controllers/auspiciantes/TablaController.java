@@ -7,12 +7,10 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -24,20 +22,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableCell;
 
 public class TablaController {
-
-    private final StringProperty selectedValue = new SimpleStringProperty(this, "selectedValue", "");
-
-    public final StringProperty selectedValueProperty() {
-        return selectedValue;
-    }
-
-    public final void setSelectedValue(String value) {
-        selectedValue.set(value);
-    }
-
-    public final String getSelectedValue() {
-        return selectedValue.get();
-    }
 
     @FXML
     private Button asignarFeriaButton;
@@ -98,7 +82,6 @@ public class TablaController {
                                 } else {
                                     btn.setOnAction((ActionEvent event) -> {
                                         Auspiciante auspiciante = getTableView().getItems().get(getIndex());
-                                        selectedValue.set(auspiciante.getRuc());
                                         FXMLLoader loader = App.getLoader("auspiciantes/editar");
                                         Parent root = null;
                                         try {

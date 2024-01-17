@@ -8,6 +8,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 public class CodigoFeriaController {
 
@@ -28,15 +31,25 @@ public class CodigoFeriaController {
     @FXML
     public void handleIngresarButtonAction(ActionEvent event){
         TablaController controller = App.getLoader("stands/tabla").getController();
-        controller.setFeria(feriasCmbBox.getValue());
-        App.setScreen("stands/tabla", event);
+        
     }
 
     @FXML
     public void initialize(){
-        ArrayList<Feria> ferias = App.datos.getFerias();
-        feriasCmbBox.getItems().clear();
-        feriasCmbBox.getItems().addAll(ferias);
+        Callback<ListView<Feria>, ListCell<Feria>> factory = lv -> new ListCell<Feria>(){
+            @Override
+            protected void updateItem(Feria feria, boolean empty){
+                super.updateItem(feria,empty);
+                setText(empty?"":feria.getNombre());
+            }
+        }
+        // ArrayList<Feria> ferias = App.datos.getFerias();
+        // ObservableList<Feria> listaObservable = new ObservableList(ferias);
+        feriasCmbBox.setCellFactory(factory);
+        feriasCmbBox.setButtonCell(factory.call(null));
+
+
+
     }
 
 }

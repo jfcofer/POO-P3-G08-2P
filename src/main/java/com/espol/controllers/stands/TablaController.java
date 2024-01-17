@@ -35,7 +35,7 @@ public class TablaController {
     private HBox sec4HBox;
 
     public void setFeria(Feria feria){
-        this.feria = feria;
+        
     }
 
     @FXML
