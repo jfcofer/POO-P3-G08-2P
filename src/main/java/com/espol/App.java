@@ -66,7 +66,7 @@ public class App extends Application {
         stage.show();
     }
     public static void setScreen(Parent root, ActionEvent event) {
-        Stage stage = new Stage();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
