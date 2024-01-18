@@ -10,7 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.util.Callback;
 
 public class CodigoFeriaController {
 
@@ -29,27 +31,23 @@ public class CodigoFeriaController {
     }
 
     @FXML
-    public void handleIngresarButtonAction(ActionEvent event){
+    public void handleIngresarButtonAction(ActionEvent event) {
         TablaController controller = App.getLoader("stands/tabla").getController();
-        
+
     }
 
     @FXML
-    public void initialize(){
-        Callback<ListView<Feria>, ListCell<Feria>> factory = lv -> new ListCell<Feria>(){
+    public void initialize() {
+        Callback<ListView<Feria>, ListCell<Feria>> factory = lv -> new ListCell<Feria>() {
             @Override
-            protected void updateItem(Feria feria, boolean empty){
-                super.updateItem(feria,empty);
-                setText(empty?"":feria.getNombre());
+            protected void updateItem(Feria feria, boolean empty) {
+                super.updateItem(feria, empty);
+                setText(empty ? "" : feria.getNombre());
             }
-        }
-        // ArrayList<Feria> ferias = App.datos.getFerias();
-        // ObservableList<Feria> listaObservable = new ObservableList(ferias);
+        }; // ArrayList<Feria> ferias = App.datos.getFerias();
+                // ObservableList<Feria> listaObservable = new ObservableList(ferias);
         feriasCmbBox.setCellFactory(factory);
         feriasCmbBox.setButtonCell(factory.call(null));
-
-
-
     }
 
 }

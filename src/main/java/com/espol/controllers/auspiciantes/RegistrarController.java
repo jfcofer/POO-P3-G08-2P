@@ -107,7 +107,7 @@ public class RegistrarController {
                     "La cedula no puede quedar vacía o ya existe un auspiciante registrado con esa cédula o ruc");
         }
         if (nombre.isBlank()) {
-            mostrarAlertaError("El nombre no puede quedar vacía");
+            mostrarAlertaError("El nombre no puede quedar vacío");
         } else if (responsable.isBlank()) {
             mostrarAlertaError("El nombre de la persona responsable no puede quedar vacío");
         } else if (telefono.isBlank()) {

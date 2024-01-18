@@ -6,17 +6,21 @@ package com.espol.controllers.auspiciantes;
 
 import com.espol.App;
 import com.espol.models.Auspiciante;
+import com.espol.models.RedSocial;
+import com.espol.models.Sectores;
+import com.espol.models.TipoRedSocial;
+import java.io.IOException;
 import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+
 
 /**
  *
@@ -81,42 +85,77 @@ public class EditarController {
     @FXML
     private TextField EmailTiktokTextField;
 
-
     public void cargarAuspiciante(String ruc) {
-        CedulaTextField.setText(ruc);
+        Auspiciante auspiciante = null;
+        for (Auspiciante a : App.datos.getAuspiciantes()) {
+            if (a.getRuc().equals(ruc)) {
+                auspiciante = a;
+            }
+        }
+        CedulaTextField.setText(auspiciante.getRuc());
+        CedulaTextField.setEditable(false);
+        NombreTextField.setText(auspiciante.getNombre());
+        PersonaResponsableTextField.setText(auspiciante.getPersonaResponsable());
+        TelefonoTextField.setText(auspiciante.getTelefono());
+        EmailTextField.setText(auspiciante.getEmail());
+        DireccionTextField.setText(auspiciante.getDireccion());
+        SitioWebTextField.setText(auspiciante.getSitioWeb());
 
-    }
+        ArrayList sectores = auspiciante.getLstTipoSectores();
+        for (Object sector : sectores) {
+            if (sector.equals(Sectores.ALIMENTACION)) {
+                AlimentacionCheckBox.setSelected(true);
+            } else if (sector.equals(Sectores.EDUCACION)) {
+                EducacionCheckBox.setSelected(true);
+            } else if (sector.equals(Sectores.SALUD)) {
+                SaludCheckBox.setSelected(true);
+            } else if (sector.equals(Sectores.VESTIMENTA)) {
+                VestimentaCheckBox.setSelected(true);
+            }
+        }
 
-    @FXML
-    public void initialize() {
-        
+        ArrayList redes = auspiciante.getRedesSociales();
+        for (Object r : redes) {
+            RedSocial red = (RedSocial) r;
+            if (red.getTipo().equals(TipoRedSocial.Twitter)) {
+                UserTwitterTextField.setText(red.getUsuario());
+                EmailTwitterTextField.setText(red.getEnlace());
+            } else if (red.getTipo().equals(TipoRedSocial.Facebook)) {
+                UserFacebookTextField.setText(red.getUsuario());
+                EmailFacebookTextField.setText(red.getEnlace());
+            } else if (red.getTipo().equals(TipoRedSocial.Instagram)) {
+                UserInstagramTextField.setText(red.getUsuario());
+                EmailInstagramTextField.setText(red.getEnlace());
+            } else if (red.getTipo().equals(TipoRedSocial.LinkedIn)) {
+                UserLinkedinTextField.setText(red.getUsuario());
+                EmailLinkedinTextField.setText(red.getEnlace());
+            } else if (red.getTipo().equals(TipoRedSocial.Pinterest)) {
+                UserPinterestTextField.setText(red.getUsuario());
+                EmailPinterestTextField.setText(red.getEnlace());
+            } else if (red.getTipo().equals(TipoRedSocial.TikTok)) {
+                UserTiktokTextField.setText(red.getUsuario());
+                EmailTiktokTextField.setText(red.getEnlace());
+            } else if (red.getTipo().equals(TipoRedSocial.Youtube)) {
+                UserYoutubeTextField.setText(red.getUsuario());
+                EmailYoutubeTextField.setText(red.getEnlace());
+            }
+        }
     }
 
     @FXML
     private void handleEditarAuspicianteButtonAction(ActionEvent event) {
-
+        
         String cedula = CedulaTextField.getText();
         String nombre = NombreTextField.getText();
+        
         String responsable = PersonaResponsableTextField.getText();
         String telefono = TelefonoTextField.getText();
         String email = EmailTextField.getText();
         String direccion = DireccionTextField.getText();
         String sitioWeb = SitioWebTextField.getText();
-        Boolean condicion = false;
 
-        // Verificar que no exista otro auspiciante con el mismo número de cédula o RUC
-        for (Auspiciante auspiciante : App.datos.getAuspiciantes()) {
-            if (auspiciante.getRuc().equals(cedula)) {
-                condicion = true;
-                return;
-            }
-        }
-
-        if (condicion == true || cedula.isBlank()) {
-            mostrarAlertaError("La cedula no puede quedar vacía o ya existe un auspiciante registrado con esa cédula o ruc");
-        }
         if (nombre.isBlank()) {
-            mostrarAlertaError("El nombre no puede quedar vacía");
+            mostrarAlertaError("El nombre no puede quedar vacío");
         } else if (responsable.isBlank()) {
             mostrarAlertaError("El nombre de la persona responsable no puede quedar vacío");
         } else if (telefono.isBlank()) {
@@ -124,52 +163,79 @@ public class EditarController {
         } else if (email.isBlank()) {
             mostrarAlertaError("El email no puede quedar vacío");
         } else {
-            // Crear un nuevo objeto Auspiciante y agregarlo a la lista
-            Auspiciante nuevoAuspiciante = new Auspiciante(cedula, nombre, telefono, email, direccion, sitioWeb, responsable);
 
+            ArrayList auspiciantes = App.datos.getAuspiciantes();
+            Auspiciante auspiciante = null;
+            for (Auspiciante a : App.datos.getAuspiciantes()) {
+                if (a.getRuc().equals(cedula)) {
+                    auspiciante = a;
+                }
+            }
+            
+            auspiciantes.remove(auspiciante);
+            auspiciante.setNombre(nombre);
+            auspiciante.setPersonaResponsable(responsable);
+            auspiciante.setTelefono(telefono);
+            auspiciante.setEmail(email);
+            auspiciante.setDireccion(direccion);
+            auspiciante.setSitioWeb(sitioWeb);
+            auspiciante.borrarSectores();
+            auspiciante.borrarRedes();
+            
             // Agregar los sectores cubiertos
             if (AlimentacionCheckBox.isSelected()) {
-                nuevoAuspiciante.agregarSectores(1);
+                auspiciante.agregarSectores(1);
             }
             if (EducacionCheckBox.isSelected()) {
-                nuevoAuspiciante.agregarSectores(2);
+                auspiciante.agregarSectores(2);
             }
             if (SaludCheckBox.isSelected()) {
-                nuevoAuspiciante.agregarSectores(3);
+                auspiciante.agregarSectores(3);
             }
             if (VestimentaCheckBox.isSelected()) {
-                nuevoAuspiciante.agregarSectores(4);
+                auspiciante.agregarSectores(4);
             }
-
-            if (nuevoAuspiciante.getLstTipoSectores().isEmpty()) {
+            
+            if (auspiciante.getLstTipoSectores().isEmpty()) {
                 mostrarAlertaError("Debe seleccionar al menos un sector cubierto");
             } else {
 
                 // Agregar las redes , leyendo los text fields de cada campo
                 if (!UserTwitterTextField.getText().isEmpty()) {
-                    nuevoAuspiciante.agregarRedSocial("Twitter", UserTwitterTextField.getText(), EmailTwitterTextField.getText());
+                    auspiciante.agregarRedSocial("Twitter", UserTwitterTextField.getText(), EmailTwitterTextField.getText());
                 }
                 if (!UserTiktokTextField.getText().isEmpty()) {
-                    nuevoAuspiciante.agregarRedSocial("TikTok", UserTiktokTextField.getText(), EmailTiktokTextField.getText());
+                    auspiciante.agregarRedSocial("TikTok", UserTiktokTextField.getText(), EmailTiktokTextField.getText());
                 }
                 if (!UserFacebookTextField.getText().isEmpty()) {
-                    nuevoAuspiciante.agregarRedSocial("Facebook", UserFacebookTextField.getText(), EmailFacebookTextField.getText());
+                    auspiciante.agregarRedSocial("Facebook", UserFacebookTextField.getText(), EmailFacebookTextField.getText());
                 }
                 if (!UserInstagramTextField.getText().isEmpty()) {
-                    nuevoAuspiciante.agregarRedSocial("Instagram", UserInstagramTextField.getText(), EmailInstagramTextField.getText());
+                    auspiciante.agregarRedSocial("Instagram", UserInstagramTextField.getText(), EmailInstagramTextField.getText());
                 }
                 if (!UserYoutubeTextField.getText().isEmpty()) {
-                    nuevoAuspiciante.agregarRedSocial("Youtube", UserYoutubeTextField.getText(), EmailYoutubeTextField.getText());
+                    auspiciante.agregarRedSocial("Youtube", UserYoutubeTextField.getText(), EmailYoutubeTextField.getText());
                 }
                 if (!UserLinkedinTextField.getText().isEmpty()) {
-                    nuevoAuspiciante.agregarRedSocial("LinkedIn", UserLinkedinTextField.getText(), EmailLinkedinTextField.getText());
+                    auspiciante.agregarRedSocial("LinkedIn", UserLinkedinTextField.getText(), EmailLinkedinTextField.getText());
                 }
                 if (!UserPinterestTextField.getText().isEmpty()) {
-                    nuevoAuspiciante.agregarRedSocial("Pinterest", UserPinterestTextField.getText(), EmailPinterestTextField.getText());
+                    auspiciante.agregarRedSocial("Pinterest", UserPinterestTextField.getText(), EmailPinterestTextField.getText());
                 }
-                App.datos.getAuspiciantes().add(nuevoAuspiciante);
-                mostrarAlertaInfo("El registro se ha realizado correctamente");
-                App.setScreen("auspiciantes/tabla", event);
+                auspiciantes.add(auspiciante);
+                
+                App.datos.setAuspiciantes(auspiciantes);
+                mostrarAlertaInfo("La edicion se ha realizado correctamente");
+                FXMLLoader loader = App.getLoader("auspiciantes/tabla");
+                                        Parent root = null;
+                                        try {
+                                            root = loader.load();
+                                        } catch (IOException ex) {
+                                            ex.printStackTrace();
+                                        }
+                                        TablaController controller = loader.getController();
+                                        controller.initialize();
+                                        App.setScreen(root, event);
             }
         }
 

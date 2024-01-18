@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public abstract class Persona implements Serializable {
+
     private String ruc;
     private String nombre;
     private String telefono;
@@ -13,7 +14,7 @@ public abstract class Persona implements Serializable {
     private String personaResponsable;
     private ArrayList<RedSocial> redesSociales;
 
-    public Persona(String ruc){
+    public Persona(String ruc) {
         this.ruc = ruc;
     }
 
@@ -51,35 +52,38 @@ public abstract class Persona implements Serializable {
         redesSociales.add(new RedSocial(red, usuario, enlace));
     }
 
+    public void borrarRedes() {
+        this.redesSociales = new ArrayList<RedSocial>();
+    }
+
     // Metodo toString
     @Override
     public String toString() {
-        return "\nNombre: " + nombre +
-                "\nRuc/Cedula: " + ruc +
-                "\nTelefono: " + telefono +
-                "\nEmail: " + email +
-                "\nDireccion: " + direccion +
-                "\nSitioWeb: " + sitioWeb +
-                "\nPersonaResponsable: " + personaResponsable +
-                "\nRedes Sociales: " + redesSociales;
+        return "\nNombre: " + nombre
+                + "\nRuc/Cedula: " + ruc
+                + "\nTelefono: " + telefono
+                + "\nEmail: " + email
+                + "\nDireccion: " + direccion
+                + "\nSitioWeb: " + sitioWeb
+                + "\nPersonaResponsable: " + personaResponsable
+                + "\nRedes Sociales: " + redesSociales;
     }
 
     @Override
-    public boolean equals (Object obj){
-        if (obj == null){
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
 
-        if (obj.getClass() != this.getClass()){
+        if (obj.getClass() != this.getClass()) {
             return false;
         }
 
         final Persona other = (Persona) obj;
-        if ((this.ruc==null) ? (other.ruc!=null) : !(this.ruc.equals(other.ruc))){
+        if ((this.ruc == null) ? (other.ruc != null) : !(this.ruc.equals(other.ruc))) {
             return false;
         }
         return true;
-        
 
     }
 
@@ -156,8 +160,8 @@ public abstract class Persona implements Serializable {
     }
 
     public static Persona buscarPersona(String ruc, ArrayList<Persona> arr) {
-        for (Persona persona : arr){
-            if (persona.ruc.equals(ruc)){
+        for (Persona persona : arr) {
+            if (persona.ruc.equals(ruc)) {
                 return persona;
             }
         }
