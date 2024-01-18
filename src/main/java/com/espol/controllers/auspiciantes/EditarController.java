@@ -101,7 +101,7 @@ public class EditarController {
         DireccionTextField.setText(auspiciante.getDireccion());
         SitioWebTextField.setText(auspiciante.getSitioWeb());
 
-        ArrayList sectores = auspiciante.getLstTipoSectores();
+        ArrayList<Sectores> sectores = auspiciante.getLstTipoSectores();
         for (Object sector : sectores) {
             if (sector.equals(Sectores.ALIMENTACION)) {
                 AlimentacionCheckBox.setSelected(true);
@@ -114,7 +114,7 @@ public class EditarController {
             }
         }
 
-        ArrayList redes = auspiciante.getRedesSociales();
+        ArrayList<RedSocial> redes = auspiciante.getRedesSociales();
         for (Object r : redes) {
             RedSocial red = (RedSocial) r;
             if (red.getTipo().equals(TipoRedSocial.Twitter)) {
@@ -164,7 +164,7 @@ public class EditarController {
             mostrarAlertaError("El email no puede quedar vacío");
         } else {
 
-            ArrayList auspiciantes = App.datos.getAuspiciantes();
+            ArrayList<Auspiciante> auspiciantes = App.datos.getAuspiciantes();
             Auspiciante auspiciante = null;
             for (Auspiciante a : App.datos.getAuspiciantes()) {
                 if (a.getRuc().equals(cedula)) {

@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-  
 import com.espol.models.Datos;
 
 /**
@@ -65,11 +64,11 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
     public static void setScreen(Parent root, ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
-
 
 }

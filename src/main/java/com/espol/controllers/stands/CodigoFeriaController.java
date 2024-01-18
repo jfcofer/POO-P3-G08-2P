@@ -1,11 +1,14 @@
 package com.espol.controllers.stands;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.espol.App;
 import com.espol.models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.collections.FXCollections;
@@ -32,8 +35,16 @@ public class CodigoFeriaController {
 
     @FXML
     public void handleIngresarButtonAction(ActionEvent event) {
-        TablaController controller = App.getLoader("stands/tabla").getController();
-
+        FXMLLoader loader = App.getLoader("stands/tabla");
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            App.setScreen("error", event);
+        }
+        TablaController controller = loader.getController();
+        controller.initialize(feriasCmbBox.getValue());
+        App.setScreen(root, event);
     }
 
     @FXML
@@ -48,6 +59,9 @@ public class CodigoFeriaController {
                 // ObservableList<Feria> listaObservable = new ObservableList(ferias);
         feriasCmbBox.setCellFactory(factory);
         feriasCmbBox.setButtonCell(factory.call(null));
+        ArrayList<Feria> ferias = App.datos.getFerias();
+        ObservableList<Feria> observableList = FXCollections.observableArrayList(ferias);
+        feriasCmbBox.setItems(observableList);
     }
 
 }
