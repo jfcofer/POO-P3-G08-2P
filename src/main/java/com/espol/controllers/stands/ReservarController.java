@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -58,11 +59,22 @@ public class ReservarController {
     void handleReservarButtonAction(ActionEvent event) {
         if (personaCmbBox.getValue() instanceof Emprendedor){
             Emprendedor emprendedor = (Emprendedor) personaCmbBox.getValue();
+            if (conteoEmprendedor(emprendedor, feria)>2){
+                mostrarAlertaError("El emprendedor no debe tener mas de dos stands reservados");
+            } else{
+                stand.setPersonaAsignada(personaCmbBox.getValue());
+                stand.setFechaAsignacion(LocalDate.now());
+                App.datos.generarArchivo();
+                App.setScreen("stands/codigoFeria", event);
+              
+            }
+        } else {
+            stand.setPersonaAsignada(personaCmbBox.getValue());
+            stand.setFechaAsignacion(LocalDate.now());
+            App.datos.generarArchivo();
+            App.setScreen("stands/codigoFeria", event);
+
         }
-        stand.setPersonaAsignada(personaCmbBox.getValue());
-        stand.setFechaAsignacion(LocalDate.now());
-        App.datos.generarArchivo();
-        App.setScreen("stands/codigoFeria", event);
     }
 
     @FXML
@@ -115,6 +127,30 @@ public class ReservarController {
         ArrayList<Persona> parentList = new ArrayList<>();
         parentList.addAll(childList);
         return parentList;
+    }
+
+    private static int conteoEmprendedor(Emprendedor emprendedor, Feria feria){
+        int standsEmprendedor = 0;
+        for (Seccion seccion : feria.getSecciones()){
+            for (Stand stand : seccion.getStands()){
+                if (stand.getPersonaAsignada() instanceof Emprendedor){
+                    Emprendedor personaEmp = (Emprendedor) stand.getPersonaAsignada();
+                    if (personaEmp.equals(emprendedor)){
+                        standsEmprendedor++;
+                    }
+
+                }
+            }
+        }
+        return standsEmprendedor;
+    }
+
+    private static void mostrarAlertaError(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
 }
