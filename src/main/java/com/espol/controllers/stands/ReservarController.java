@@ -27,7 +27,7 @@ public class ReservarController {
     private Feria feria;
 
     private Stand stand;
-  
+
     @FXML
     private Button backButton;
 
@@ -57,16 +57,16 @@ public class ReservarController {
 
     @FXML
     void handleReservarButtonAction(ActionEvent event) {
-        if (personaCmbBox.getValue() instanceof Emprendedor){
+        if (App.datos.getEmprendedores().contains(personaCmbBox.getValue())) {
             Emprendedor emprendedor = (Emprendedor) personaCmbBox.getValue();
-            if (conteoEmprendedor(emprendedor, feria)>2){
+            if (conteoEmprendedor(emprendedor, feria) >= 2) {
                 mostrarAlertaError("El emprendedor no debe tener mas de dos stands reservados");
-            } else{
+            } else {
                 stand.setPersonaAsignada(personaCmbBox.getValue());
                 stand.setFechaAsignacion(LocalDate.now());
                 App.datos.generarArchivo();
                 App.setScreen("stands/codigoFeria", event);
-              
+
             }
         } else {
             stand.setPersonaAsignada(personaCmbBox.getValue());
@@ -78,18 +78,18 @@ public class ReservarController {
     }
 
     @FXML
-    void handleRolChoiceBoxAction(ActionEvent event){
+    void handleRolChoiceBoxAction(ActionEvent event) {
         String rol = rolChoiceBox.getValue();
         personaCmbBox.getItems().clear();
         updatePersonaCmbBox(rol);
     }
 
-    private void updatePersonaCmbBox(String rol){
-        if ("Auspiciante".equals(rol)){
-            Callback<ListView<Persona>, ListCell<Persona>> factory = lv -> new ListCell<Persona>(){
+    private void updatePersonaCmbBox(String rol) {
+        if ("Auspiciante".equals(rol)) {
+            Callback<ListView<Persona>, ListCell<Persona>> factory = lv -> new ListCell<Persona>() {
                 @Override
-                protected void updateItem(Persona auspiciante, boolean empty){
-                    super.updateItem(auspiciante,empty);
+                protected void updateItem(Persona auspiciante, boolean empty) {
+                    super.updateItem(auspiciante, empty);
                     setText(empty ? "" : auspiciante.getNombre());
                 }
             };
@@ -99,10 +99,10 @@ public class ReservarController {
             ObservableList<Persona> observableList = FXCollections.observableArrayList(auspiciantes);
             personaCmbBox.setItems(observableList);
         } else {
-            Callback<ListView<Persona>, ListCell<Persona>> factory = lv -> new ListCell<Persona>(){
+            Callback<ListView<Persona>, ListCell<Persona>> factory = lv -> new ListCell<Persona>() {
                 @Override
-                protected void updateItem(Persona emprendedor, boolean empty){
-                    super.updateItem(emprendedor,empty);
+                protected void updateItem(Persona emprendedor, boolean empty) {
+                    super.updateItem(emprendedor, empty);
                     setText(empty ? "" : emprendedor.getNombre());
                 }
             };
@@ -129,13 +129,13 @@ public class ReservarController {
         return parentList;
     }
 
-    private static int conteoEmprendedor(Emprendedor emprendedor, Feria feria){
+    private static int conteoEmprendedor(Emprendedor emprendedor, Feria feria) {
         int standsEmprendedor = 0;
-        for (Seccion seccion : feria.getSecciones()){
-            for (Stand stand : seccion.getStands()){
-                if (stand.getPersonaAsignada() instanceof Emprendedor){
+        for (Seccion seccion : feria.getSecciones()) {
+            for (Stand stand : seccion.getStands()) {
+                if (stand.getPersonaAsignada() instanceof Emprendedor) {
                     Emprendedor personaEmp = (Emprendedor) stand.getPersonaAsignada();
-                    if (personaEmp.equals(emprendedor)){
+                    if (personaEmp.equals(emprendedor)) {
                         standsEmprendedor++;
                     }
 
