@@ -59,6 +59,10 @@ public abstract class Persona implements Serializable {
     // Metodo toString
     @Override
     public String toString() {
+        String redes = "";
+        for (RedSocial rs : redesSociales){
+            redes += "\t"+rs+'\n';
+        }
         return "\nNombre: " + nombre
                 + "\nRuc/Cedula: " + ruc
                 + "\nTelefono: " + telefono
@@ -66,7 +70,7 @@ public abstract class Persona implements Serializable {
                 + "\nDireccion: " + direccion
                 + "\nSitioWeb: " + sitioWeb
                 + "\nPersonaResponsable: " + personaResponsable
-                + "\nRedes Sociales: " + redesSociales;
+                + "\nRedes Sociales: " + redes;
     }
 
     @Override

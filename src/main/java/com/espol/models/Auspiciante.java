@@ -36,11 +36,4 @@ public class Auspiciante extends Persona {
     }
   }
 
-  @Override
-  public boolean equals(Object obj) {
-    Auspiciante a = (Auspiciante) obj;
-    if (this.getNombre().equals(a.getNombre()))
-      return true;
-    return false;
-  }
 }

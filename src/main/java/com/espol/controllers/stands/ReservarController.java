@@ -1,5 +1,6 @@
 package com.espol.controllers.stands;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,10 +17,15 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.util.Callback;
 
 public class ReservarController {
 
     private Feria feria;
+
+    private Stand stand;
   
     @FXML
     private Button backButton;
@@ -50,42 +56,48 @@ public class ReservarController {
 
     @FXML
     void handleReservarButtonAction(ActionEvent event) {
-
+        if (personaCmbBox.getValue() instanceof Emprendedor){
+            Emprendedor emprendedor = (Emprendedor) personaCmbBox.getValue();
+        }
+        stand.setPersonaAsignada(personaCmbBox.getValue());
+        stand.setFechaAsignacion(LocalDate.now());
+        App.datos.generarArchivo();
         App.setScreen("stands/codigoFeria", event);
     }
 
     @FXML
-    void handleRolChoiceBoxAction(){
+    void handleRolChoiceBoxAction(ActionEvent event){
         String rol = rolChoiceBox.getValue();
+        personaCmbBox.getItems().clear();
         updatePersonaCmbBox(rol);
     }
 
     private void updatePersonaCmbBox(String rol){
         if ("Auspiciante".equals(rol)){
-            Callback<ListView<Auspiciante>, ListCell<Auspiciante>> factory = lv -> new ListCell<Auspiciante>(){
+            Callback<ListView<Persona>, ListCell<Persona>> factory = lv -> new ListCell<Persona>(){
                 @Override
-                protected void updateItem(Auspiciante auspiciante, boolean empty){
-                    super.updateItem(feria,empty);
+                protected void updateItem(Persona auspiciante, boolean empty){
+                    super.updateItem(auspiciante,empty);
                     setText(empty ? "" : auspiciante.getNombre());
                 }
             };
             personaCmbBox.setCellFactory(factory);
             personaCmbBox.setButtonCell(factory.call(null));
-            ArrayList<Auspiciante> auspiciantes = App.datos.getAuspiciantes();
-            ObservableList<Auspiciante> observableList = FXCollections.observableArrayList(auspiciantes);
+            ArrayList<Persona> auspiciantes = convertToParentList(App.datos.getAuspiciantes());
+            ObservableList<Persona> observableList = FXCollections.observableArrayList(auspiciantes);
             personaCmbBox.setItems(observableList);
         } else {
-            Callback<ListView<Emprendedor>, ListCell<Emprendedor>> factory = lv -> new ListCell<Emprendedor>(){
+            Callback<ListView<Persona>, ListCell<Persona>> factory = lv -> new ListCell<Persona>(){
                 @Override
-                protected void updateItem(Emprendedor emprendedor, boolean empty){
-                    super.updateItem(feria,empty);
+                protected void updateItem(Persona emprendedor, boolean empty){
+                    super.updateItem(emprendedor,empty);
                     setText(empty ? "" : emprendedor.getNombre());
                 }
             };
             personaCmbBox.setCellFactory(factory);
             personaCmbBox.setButtonCell(factory.call(null));
-            ArrayList<Emprendedor> emprendedores = App.datos.getEmprendedores();
-            ObservableList<Emprendedor> observableList = FXCollections.observableArrayList(emprendedores);
+            ArrayList<Persona> emprendedores = convertToParentList(App.datos.getEmprendedores());
+            ObservableList<Persona> observableList = FXCollections.observableArrayList(emprendedores);
             personaCmbBox.setItems(observableList);
         }
     }
@@ -93,9 +105,16 @@ public class ReservarController {
     @FXML
     public void initialize(Feria feria, Stand stand) {
         this.feria = feria;
+        this.stand = stand;
         List<String> list = new ArrayList<String>(Arrays.asList("Auspiciante", "Emprendedor"));
         ObservableList<String> roles = FXCollections.observableArrayList(list);
         rolChoiceBox.setItems(roles);
+    }
+
+    private static <T extends Persona> ArrayList<Persona> convertToParentList(List<T> childList) {
+        ArrayList<Persona> parentList = new ArrayList<>();
+        parentList.addAll(childList);
+        return parentList;
     }
 
 }
