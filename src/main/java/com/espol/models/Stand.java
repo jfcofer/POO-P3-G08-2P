@@ -33,7 +33,7 @@ public class Stand implements Serializable {
   }
 
   public String toString() {
-    return "\nStand:" + "\nCodigo: " + this.codigo + "\nFecha Asignada: " + this.fechaAsignacion
+    return "\nStand:" + "\nCodigo: " + this.codigo + "\nFecha Asignada: " + ((fechaAsignacion == null) ? "Ninguna" : fechaAsignacion)
         + "\n\nPersona Asignada: " + ((this.personaAsignada == null) ? "Ninguna" : personaAsignada.toString());
 
   }

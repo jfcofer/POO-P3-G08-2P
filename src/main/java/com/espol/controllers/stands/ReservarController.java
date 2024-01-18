@@ -65,14 +65,34 @@ public class ReservarController {
                 stand.setPersonaAsignada(personaCmbBox.getValue());
                 stand.setFechaAsignacion(LocalDate.now());
                 App.datos.generarArchivo();
-                App.setScreen("stands/codigoFeria", event);
+                FXMLLoader loader = App.getLoader("stands/tabla");
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (Exception e) {
+                    App.setScreen("error", event);
+                    e.printStackTrace();
+                }
+                TablaController tablaController = loader.getController();
+                tablaController.initialize(feria);
+                App.setScreen(root, event);
 
             }
         } else {
             stand.setPersonaAsignada(personaCmbBox.getValue());
             stand.setFechaAsignacion(LocalDate.now());
             App.datos.generarArchivo();
-            App.setScreen("stands/codigoFeria", event);
+            FXMLLoader loader = App.getLoader("stands/tabla");
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (Exception e) {
+                App.setScreen("error", event);
+                e.printStackTrace();
+            }
+            TablaController tablaController = loader.getController();
+            tablaController.initialize(feria);
+            App.setScreen(root, event);
 
         }
     }
