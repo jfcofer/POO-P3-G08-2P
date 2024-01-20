@@ -1,7 +1,7 @@
 module com.espol {
     requires transitive javafx.graphics;
     requires transitive javafx.fxml;
-    requires javafx.controls;
+    requires transitive javafx.controls;
 
     opens com.espol to javafx.fxml;
     opens com.espol.models to javafx.base;

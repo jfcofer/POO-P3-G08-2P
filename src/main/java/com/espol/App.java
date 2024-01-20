@@ -7,8 +7,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Optional;
+
 import com.espol.models.Datos;
 
 /**
@@ -96,6 +99,13 @@ public class App extends Application {
         alert.setTitle("Info");
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+    public static Optional<ButtonType> mostrarAlertaAdvert(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText(null);
+        alert.setTitle("Advertencia");
+        alert.setContentText(mensaje);
+        return alert.showAndWait();
     }
 
 
