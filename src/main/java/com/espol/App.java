@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import java.io.IOException;
 import com.espol.models.Datos;
@@ -80,6 +81,22 @@ public class App extends Application {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     };
+
+    public static void mostrarAlertaError(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    public static void mostrarAlertaInfo(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Info");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
 
 
 }

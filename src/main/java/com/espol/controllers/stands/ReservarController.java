@@ -60,7 +60,7 @@ public class ReservarController {
         if (App.datos.getEmprendedores().contains(personaCmbBox.getValue())) {
             Emprendedor emprendedor = (Emprendedor) personaCmbBox.getValue();
             if (conteoEmprendedor(emprendedor, feria) >= 2) {
-                mostrarAlertaError("El emprendedor no debe tener mas de dos stands reservados");
+                App.mostrarAlertaError("El emprendedor no debe tener mas de dos stands reservados");
             } else {
                 stand.setPersonaAsignada(personaCmbBox.getValue());
                 stand.setFechaAsignacion(LocalDate.now());
@@ -115,7 +115,7 @@ public class ReservarController {
             };
             personaCmbBox.setCellFactory(factory);
             personaCmbBox.setButtonCell(factory.call(null));
-            ArrayList<Persona> auspiciantes = convertToParentList(App.datos.getAuspiciantes());
+            ArrayList<Persona> auspiciantes = convertToParentList(feria.getAuspiciantes());
             ObservableList<Persona> observableList = FXCollections.observableArrayList(auspiciantes);
             personaCmbBox.setItems(observableList);
         } else {
@@ -165,12 +165,5 @@ public class ReservarController {
         return standsEmprendedor;
     }
 
-    private static void mostrarAlertaError(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
 
 }

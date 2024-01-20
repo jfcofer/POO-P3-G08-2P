@@ -125,22 +125,22 @@ public class RegistrarController {
         }
         
         if (condicion == true || cedula.isBlank()) {
-            mostrarAlertaError("La cedula no puede quedar vacía o ya existe un emprendedor registrado con esa cédula o ruc");
+            App.mostrarAlertaError("La cedula no puede quedar vacía o ya existe un emprendedor registrado con esa cédula o ruc");
         } 
         if(nombre.isBlank()) {
-            mostrarAlertaError("El nombre no puede quedar vacía");
+            App.mostrarAlertaError("El nombre no puede quedar vacía");
         }
         else if(responsable.isBlank()){
-            mostrarAlertaError("El nombre de la persona responsable no puede quedar vacío");
+            App.mostrarAlertaError("El nombre de la persona responsable no puede quedar vacío");
         }
         else if(telefono.isBlank()){
-            mostrarAlertaError("El número de teléfono no puede quedar vacío");
+            App.mostrarAlertaError("El número de teléfono no puede quedar vacío");
         }
         else if(email.isBlank()){
-            mostrarAlertaError("El email no puede quedar vacío");
+            App.mostrarAlertaError("El email no puede quedar vacío");
         }
         else if(DescripcionServicio.isBlank()){
-            mostrarAlertaError("La descripcion del servicio no puede quedar vacío");
+            App.mostrarAlertaError("La descripcion del servicio no puede quedar vacío");
         }
         else{
             // Crear un nuevo objeto Emprendedor y agregarlo a la lista
@@ -169,30 +169,13 @@ public class RegistrarController {
                 nuevoEmprendedor.agregarRedSocial("Pinterest", UserPinterestTextField.getText(), EmailPinterestTextField.getText());
             }
             App.datos.getEmprendedores().add(nuevoEmprendedor);
-            mostrarAlertaInfo("El registro se ha realizado correctamente");
+            App.mostrarAlertaInfo("El registro se ha realizado correctamente");
             App.setScreen("emprendedores/tabla", event);
             
         }
         
 
     }
-    
-    @FXML
-    private void mostrarAlertaError(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
-
-    @FXML
-    private void mostrarAlertaInfo(String mensaje){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Info");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
+   
 
 }

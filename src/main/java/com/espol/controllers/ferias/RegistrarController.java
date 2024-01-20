@@ -1,5 +1,7 @@
 package com.espol.controllers.ferias;
 
+import java.time.LocalDate;
+
 import com.espol.App;
 import com.espol.models.Feria;
 
@@ -54,7 +56,38 @@ public class RegistrarController {
 
     @FXML
     private void handleRegisterButtonAction(ActionEvent event) {
-        Feria feria = new Feria(App.datos.getFerias().getLast().getCodigo() + 1, null, null, null, null, null, null);
+        String name = nameTxtField.getText();
+        String descripcion = descTxtField.getText();
+        String lugar = lugarTxtField.getText();
+        LocalDate fechaInicio = inicioDate.getValue();
+        LocalDate fechaFin = finDate.getValue();
+
+        if (registerValidation(name, descripcion, lugar, fechaInicio, fechaFin, lugar)) {
+            Feria feria = new Feria(App.datos.getFerias().getLast().getCodigo() + 1, name, descripcion, lugar,
+                    fechaInicio, fechaFin, lugar);
+            App.datos.getFerias().add(feria);
+            App.datos.generarArchivo();
+            App.mostrarAlertaInfo("Registro realizado Correctamente");
+            App.setScreen("ferias/tabla", event);
+
+        }
+
+    }
+
+    private boolean registerValidation(String nombre, String descripcion, String lugar, LocalDate fechaInicio,
+            LocalDate fechaFin,
+            String horario) {
+        for (Feria feria : App.datos.getFerias()) {
+            if (feria.getNombre().equals(nombre)) {
+                return false;
+            }
+        }
+        if (nombre.isBlank() || descripcion.isBlank() || lugar.isBlank() || fechaInicio == null || fechaFin == null) {
+            return false;
+        }
+
+        return true;
+
     }
 
 }

@@ -1,24 +1,16 @@
 package com.espol.models;
 
-import java.io.Serializable;
-
-public class AuspicianteEnFeria implements Serializable {
+public class AuspicianteEnFeria extends Auspiciante {
     private Auspiciante auspiciante;
     private String descripcion;
     private boolean tieneStand;
 
     public AuspicianteEnFeria(Auspiciante auspiciante, String descripcion, boolean tieneStand) {
-        this.auspiciante = auspiciante;
+        super(auspiciante.getRuc(), auspiciante.getNombre(), auspiciante.getTelefono(), auspiciante.getEmail(),
+                auspiciante.getDireccion(), auspiciante.getSitioWeb(), auspiciante.getPersonaResponsable());
         this.descripcion = descripcion;
         this.tieneStand = tieneStand;
-    }
 
-    public Auspiciante getAuspiciante() {
-        return auspiciante;
-    }
-
-    public void setAuspiciante(Auspiciante auspiciante) {
-        this.auspiciante = auspiciante;
     }
 
     public String getDescripcion() {
@@ -40,14 +32,6 @@ public class AuspicianteEnFeria implements Serializable {
     public String toString() {
         return "\nAuspiciante: " + auspiciante.toString() + "\nDescripcion del Servicio: " + descripcion
                 + "\nTiene Stand: " + (tieneStand ? "Si" : "No");
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        AuspicianteEnFeria a = (AuspicianteEnFeria) obj;
-        if (this.auspiciante.equals(a.getAuspiciante()))
-            return true;
-        return false;
     }
 
 }

@@ -155,13 +155,13 @@ public class EditarController {
         String sitioWeb = SitioWebTextField.getText();
 
         if (nombre.isBlank()) {
-            mostrarAlertaError("El nombre no puede quedar vacío");
+            App.mostrarAlertaError("El nombre no puede quedar vacío");
         } else if (responsable.isBlank()) {
-            mostrarAlertaError("El nombre de la persona responsable no puede quedar vacío");
+            App.mostrarAlertaError("El nombre de la persona responsable no puede quedar vacío");
         } else if (telefono.isBlank()) {
-            mostrarAlertaError("El número de teléfono no puede quedar vacío");
+            App.mostrarAlertaError("El número de teléfono no puede quedar vacío");
         } else if (email.isBlank()) {
-            mostrarAlertaError("El email no puede quedar vacío");
+            App.mostrarAlertaError("El email no puede quedar vacío");
         } else {
 
             ArrayList<Auspiciante> auspiciantes = App.datos.getAuspiciantes();
@@ -197,7 +197,7 @@ public class EditarController {
             }
             
             if (auspiciante.getLstTipoSectores().isEmpty()) {
-                mostrarAlertaError("Debe seleccionar al menos un sector cubierto");
+                App.mostrarAlertaError("Debe seleccionar al menos un sector cubierto");
             } else {
 
                 // Agregar las redes , leyendo los text fields de cada campo
@@ -225,7 +225,7 @@ public class EditarController {
                 auspiciantes.add(auspiciante);
                 
                 App.datos.setAuspiciantes(auspiciantes);
-                mostrarAlertaInfo("La edicion se ha realizado correctamente");
+                App.mostrarAlertaInfo("La edicion se ha realizado correctamente");
                 FXMLLoader loader = App.getLoader("auspiciantes/tabla");
                                         Parent root = null;
                                         try {
@@ -241,23 +241,6 @@ public class EditarController {
 
     }
 
-    @FXML
-    private void mostrarAlertaError(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
-
-    @FXML
-    private void mostrarAlertaInfo(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Info");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
 
     @FXML
     private void handleBackButtonAction(ActionEvent event) {

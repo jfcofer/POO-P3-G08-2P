@@ -103,17 +103,17 @@ public class RegistrarController {
         }
 
         if (condicion == true || cedula.isBlank()) {
-            mostrarAlertaError(
+            App.mostrarAlertaError(
                     "La cedula no puede quedar vacía o ya existe un auspiciante registrado con esa cédula o ruc");
         }
         if (nombre.isBlank()) {
-            mostrarAlertaError("El nombre no puede quedar vacío");
+            App.mostrarAlertaError("El nombre no puede quedar vacío");
         } else if (responsable.isBlank()) {
-            mostrarAlertaError("El nombre de la persona responsable no puede quedar vacío");
+            App.mostrarAlertaError("El nombre de la persona responsable no puede quedar vacío");
         } else if (telefono.isBlank()) {
-            mostrarAlertaError("El número de teléfono no puede quedar vacío");
+            App.mostrarAlertaError("El número de teléfono no puede quedar vacío");
         } else if (email.isBlank()) {
-            mostrarAlertaError("El email no puede quedar vacío");
+            App.mostrarAlertaError("El email no puede quedar vacío");
         } else {
             // Crear un nuevo objeto Auspiciante y agregarlo a la lista
             Auspiciante nuevoAuspiciante = new Auspiciante(cedula, nombre, telefono, email, direccion, sitioWeb,
@@ -134,7 +134,7 @@ public class RegistrarController {
             }
 
             if (nuevoAuspiciante.getLstTipoSectores().isEmpty()) {
-                mostrarAlertaError("Debe seleccionar al menos un sector cubierto");
+                App.mostrarAlertaError("Debe seleccionar al menos un sector cubierto");
             } else {
 
                 // Agregar las redes , leyendo los text fields de cada campo
@@ -168,28 +168,11 @@ public class RegistrarController {
                 }
                 App.datos.getAuspiciantes().add(nuevoAuspiciante);
                 App.datos.generarArchivo();
-                mostrarAlertaInfo("El registro se ha realizado correctamente");
+                App.mostrarAlertaInfo("El registro se ha realizado correctamente");
                 App.setScreen("auspiciantes/tabla", event);
             }
         }
 
     }
 
-    @FXML
-    private void mostrarAlertaError(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
-
-    @FXML
-    private void mostrarAlertaInfo(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Info");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
 }
