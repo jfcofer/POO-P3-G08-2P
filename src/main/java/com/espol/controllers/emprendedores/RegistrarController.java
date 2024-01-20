@@ -7,7 +7,6 @@ package com.espol.controllers.emprendedores;
 import com.espol.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import com.espol.models.Emprendedor;

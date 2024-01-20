@@ -13,14 +13,22 @@ import javafx.fxml.FXML;
  *
  * @author William
  */
+
 public class EditarController {
+
+    private Feria feria;
+
+
 
     /**
      * Initializes the controller class.
      */
+
     @FXML
     public void initialize(Feria feria) {
+        this.feria = feria;
 
+        
     }
 
 }

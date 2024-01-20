@@ -69,7 +69,6 @@ public class RegistrarController {
             App.datos.generarArchivo();
             App.mostrarAlertaInfo("Registro realizado Correctamente");
             App.setScreen("ferias/tabla", event);
-
         }
 
     }
@@ -79,11 +78,23 @@ public class RegistrarController {
             String horario) {
         for (Feria feria : App.datos.getFerias()) {
             if (feria.getNombre().equals(nombre)) {
+                App.mostrarAlertaError("Ya existe una feria registrada con ese nombre");
                 return false;
             }
         }
-        if (nombre.isBlank() || descripcion.isBlank() || lugar.isBlank() || fechaInicio == null || fechaFin == null) {
-            return false;
+        if (nombre.isBlank()) {
+            App.mostrarAlertaError("Debe ingresar un nombre");
+        } else if (descripcion.isBlank()) {
+            App.mostrarAlertaError("Debe ingresar un descripcion");
+        } else if (lugar.isBlank()) {
+
+            App.mostrarAlertaError("Debe ingresar un lugar");
+        } else if (fechaInicio == null) {
+            App.mostrarAlertaError("Debe ingresar una fecha valida de inicio");
+
+        } else if (fechaFin == null) {
+            App.mostrarAlertaError("Debe ingresar una fecha valida de fin");
+
         }
 
         return true;
