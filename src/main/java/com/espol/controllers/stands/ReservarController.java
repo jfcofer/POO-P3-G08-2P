@@ -112,7 +112,7 @@ public class ReservarController {
                     super.updateItem(auspiciante, empty);
                     setText(empty ? "" : auspiciante.getNombre());
                 }
-            };
+            };2
             personaCmbBox.setCellFactory(factory);
             personaCmbBox.setButtonCell(factory.call(null));
             ArrayList<Persona> auspiciantes = convertToParentList(App.datos.getAuspiciantes());

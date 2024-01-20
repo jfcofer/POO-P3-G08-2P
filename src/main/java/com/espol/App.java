@@ -70,5 +70,16 @@ public class App extends Application {
         stage.setScene(new Scene(root));
         stage.show();
     }
+    public static void setNewScreen(Parent root, ActionEvent event) {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public static void closeScreen(ActionEvent event){
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    };
+
 
 }
