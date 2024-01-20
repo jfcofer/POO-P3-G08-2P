@@ -4,6 +4,8 @@
  */
 package com.espol.controllers.ferias;
 
+import com.espol.models.Feria;
+
 import javafx.fxml.FXML;
 
 /**
@@ -13,11 +15,12 @@ import javafx.fxml.FXML;
  */
 public class DetallesController {
 
+    private Feria feria;
     /**
      * Initializes the controller class.
      */
     @FXML
-    public void initialize() {
-
+    public void initialize(Feria feria) {
+        this.feria = feria;
     }
 }

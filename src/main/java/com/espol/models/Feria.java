@@ -92,14 +92,14 @@ public class Feria implements Serializable {
         this.secciones = secciones;
     }
 
-    public Feria(int codigo, String nombre, String descripcion, String lugar, String fechaInicio, String fechaFin,
+    public Feria(int codigo, String nombre, String descripcion, String lugar, LocalDate fechaInicio, LocalDate fechaFin,
             String horario) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.lugar = lugar;
-        this.fechaInicio = LocalDate.parse(fechaInicio);
-        this.fechaFin = LocalDate.parse(fechaFin);
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
         this.horario = horario;
         this.secciones = new Seccion[4];
         for (int i = 0; i < 4; i++) {

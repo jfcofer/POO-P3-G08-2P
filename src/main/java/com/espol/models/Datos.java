@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Datos implements Serializable {
@@ -115,7 +116,7 @@ public class Datos implements Serializable {
 
     public static void agregarFerias(ArrayList<Feria> listaFerias, ArrayList<Auspiciante> listaAuspiciantes) {
         Feria feria = new Feria(0, "Feria de Navidad",
-                "Decoraciones para tu casa en tiempos de Navidad", "Ceibos", "2024-10-20", "2024-12-20", "9:00-20:00");
+                "Decoraciones para tu casa en tiempos de Navidad", "Ceibos", LocalDate.parse("2024-10-20"), LocalDate.parse("2024-12-20"), "9:00-20:00");
         feria.asignarNumeroStands(1, 1, 1, 1);
         feria.asignarAuspiciante(listaAuspiciantes.get(0), "Gorros de Navidad", true);
         listaFerias.add(feria);

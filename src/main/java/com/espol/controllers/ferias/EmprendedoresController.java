@@ -4,6 +4,8 @@
  */
 package com.espol.controllers.ferias;
 
+import com.espol.models.Feria;
+
 import javafx.fxml.FXML;
 
 /**
@@ -16,9 +18,12 @@ public class EmprendedoresController {
     /**
      * Initializes the controller class.
      */
-    @FXML
-    public void initialize() {
 
+    private Feria feria;
+
+    @FXML
+    public void initialize(Feria feria) {
+        this.feria = feria;
     }
 
 }

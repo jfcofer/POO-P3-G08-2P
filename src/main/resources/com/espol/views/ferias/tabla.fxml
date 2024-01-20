@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="455.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.TablaController">
+<BorderPane prefHeight="455.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.espol.controllers.ferias.TablaController">
    <top>
       <Label alignment="CENTER" text="Ferias" BorderPane.alignment="CENTER">
          <font>
@@ -35,7 +35,7 @@
                   <TableColumn fx:id="lugarColumn" editable="false" prefWidth="100.0" text="Lugar" />
                   <TableColumn fx:id="auspiciantesColumn" editable="false" prefWidth="100.0" text="N° Auspiciantes" />
                   <TableColumn fx:id="emprendedoresColumn" editable="false" prefWidth="100.0" text="N° Emprendedores" />
-                  <TableColumn fx:id="opcionesColumn" editable="false" prefWidth="70.0" sortable="false" text="Opciones" />
+                  <TableColumn fx:id="opcionesColumn" editable="false" prefWidth="200.0" sortable="false" text="Opciones" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
