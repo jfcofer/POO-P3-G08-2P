@@ -61,9 +61,9 @@ public class AsignarController {
         descripcionTextField.setEditable(false);
         standCheckBox.setVisible(false);
         btnAsignar.setDisable(true);
-        
+
         App.mostrarAlertaInfo(
-                        "Primero deberá seleccionar una feria activa, luego digitar la cédula/ruc del auspiciante y validarlo antes de continuar llenando los otros campos.\n Una vez validado estos datos no podrá cambiarlos a menos que regrese y vuelva a ingresar a esta ventana.");
+                "Primero deberá seleccionar una feria activa, luego digitar la cédula/ruc del auspiciante y validarlo antes de continuar llenando los otros campos.\n Una vez validado estos datos no podrá cambiarlos a menos que regrese y vuelva a ingresar a esta ventana.");
     }
 
     @FXML
@@ -104,31 +104,33 @@ public class AsignarController {
         Feria feria = (Feria) feriasComboBox.getValue();
         String descripcion = descripcionTextField.getText();
         Auspiciante auspiciante = null;
-        
-        for (Auspiciante a: App.datos.getAuspiciantes()){
-            if (a.getRuc().equals(cedula)){
+
+        for (Auspiciante a : App.datos.getAuspiciantes()) {
+            if (a.getRuc().equals(cedula)) {
                 auspiciante = a;
             }
         }
-        if(descripcion.isBlank()){
+        if (descripcion.isBlank()) {
             App.mostrarAlertaError(
-                        "La descripción de lo que cubre el auspicio no puede quedar vacío.");
-        }else{
-            Boolean registrar=true;
-            for (Auspiciante a: feria.getAuspiciantes()){
-                if (a.getRuc().equals(cedula)){
-                     App.mostrarAlertaError(
-                        "Este auspiciante ya se encuentra asignado a esta feria.");
-                     registrar=false;
+                    "La descripción de lo que cubre el auspicio no puede quedar vacío.");
+        } else {
+            Boolean registrar = true;
+            for (Auspiciante a : feria.getAuspiciantes()) {
+                if (a.getRuc().equals(cedula)) {
+                    App.mostrarAlertaError(
+                            "Este auspiciante ya se encuentra asignado a esta feria.");
+                    registrar = false;
+                    App.setScreen("auspiciantes/tabla", event);
                 }
             }
-            if(registrar){
-                feria.asignarAuspiciante(auspiciante,descripcion,stand);
+            if (registrar) {
+                feria.asignarAuspiciante(auspiciante, descripcion, stand);
                 App.mostrarAlertaInfo(
                         "El auspiciante ha sido asignado a la feria correctammente.");
-            }              
+                App.setScreen("auspiciantes/tabla", event);
+            }
         }
-        App.setScreen("auspiciantes/tabla", event);
+
     }
 
     @FXML

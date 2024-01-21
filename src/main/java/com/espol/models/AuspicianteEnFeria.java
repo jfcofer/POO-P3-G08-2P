@@ -29,9 +29,4 @@ public class AuspicianteEnFeria extends Auspiciante {
         this.tieneStand = tieneStand;
     }
 
-    public String toString() {
-        return "\nAuspiciante: " + auspiciante.toString() + "\nDescripcion del Servicio: " + descripcion
-                + "\nTiene Stand: " + (tieneStand ? "Si" : "No");
-    }
-
 }
