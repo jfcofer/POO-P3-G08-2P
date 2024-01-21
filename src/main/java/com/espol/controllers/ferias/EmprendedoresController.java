@@ -51,35 +51,17 @@ public class EmprendedoresController {
             @Override
             protected void updateItem(String string, boolean empty) {
                 super.updateItem(string, empty);
-                System.out.println(getIndex());
-                Emprendedor emprendedor = tc.getTableView().getItems().get(getIndex());
-
-                outloop:for (Seccion seccion : feria.getSecciones()) {
-                    for (Stand stand : seccion.getStands()) {
-                        if (stand.getPersonaAsignada() instanceof Emprendedor) {
-                            if (emprendedor.equals((Emprendedor) stand.getPersonaAsignada()))
-                                setText(Integer.toString(seccion.getId()));
-                                break outloop;
-                        }
-                    }
-                }
-
+                Emprendedor emprendedor = getTableView().getItems().get(getIndex());
+                System.out.println(emprendedor);
             }
         });
         standColumn.setCellFactory(tc -> new TableCell<Emprendedor, String>() {
             @Override
             protected void updateItem(String string, boolean empty) {
                 super.updateItem(string, empty);
-                Emprendedor emprendedor = tc.getTableView().getItems().get(getIndex());
-                for (Seccion seccion : feria.getSecciones()) {
-                    for (Stand stand : seccion.getStands()) {
-                        if (stand.getPersonaAsignada() instanceof Emprendedor) {
-                            if (emprendedor.equals((Emprendedor) stand.getPersonaAsignada()))
-                                setText(stand.getCodigo());
-                        
-                        }
-                    }
-                }
+                Emprendedor emprendedor = getTableView().getItems().get(getIndex());
+                System.out.println(emprendedor);
+
 
             }
         });
