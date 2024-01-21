@@ -53,6 +53,7 @@ public class TablaController {
                 VBox standVBox = new VBox(3);
                 VBox.setVgrow(standVBox, Priority.ALWAYS);
                 standVBox.setAlignment(Pos.CENTER);
+                standVBox.setPrefWidth(100);
                 standVBox.getChildren().addAll(titulo, codigo);
                 standVBox.setOnMouseClicked(event -> {
                     infoTxtArea.setText(stand.toString());

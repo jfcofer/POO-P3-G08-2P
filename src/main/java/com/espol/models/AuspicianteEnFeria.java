@@ -1,7 +1,6 @@
 package com.espol.models;
 
 public class AuspicianteEnFeria extends Auspiciante {
-    private Auspiciante auspiciante;
     private String descripcion;
     private boolean tieneStand;
 
@@ -30,7 +29,7 @@ public class AuspicianteEnFeria extends Auspiciante {
     }
 
     public String toString() {
-        return "\nAuspiciante: " + auspiciante.toString() + "\nDescripcion del Servicio: " + descripcion
+        return "\nAuspiciante: " + super.toString() + "\nDescripcion del Servicio: " + descripcion
                 + "\nTiene Stand: " + (tieneStand ? "Si" : "No");
     }
 

@@ -52,14 +52,14 @@ public class EmprendedoresController {
             protected void updateItem(String string, boolean empty) {
                 super.updateItem(string, empty);
                 System.out.println(getIndex());
-                Emprendedor emprendedor = tc.getTableView().getItems().get((getIndex() * -1) - 1);
+                Emprendedor emprendedor = tc.getTableView().getItems().get(getIndex());
 
-                for (Seccion seccion : feria.getSecciones()) {
+                outloop:for (Seccion seccion : feria.getSecciones()) {
                     for (Stand stand : seccion.getStands()) {
                         if (stand.getPersonaAsignada() instanceof Emprendedor) {
                             if (emprendedor.equals((Emprendedor) stand.getPersonaAsignada()))
                                 setText(Integer.toString(seccion.getId()));
-                            break;
+                                break outloop;
                         }
                     }
                 }
@@ -76,7 +76,7 @@ public class EmprendedoresController {
                         if (stand.getPersonaAsignada() instanceof Emprendedor) {
                             if (emprendedor.equals((Emprendedor) stand.getPersonaAsignada()))
                                 setText(stand.getCodigo());
-                            break;
+                        
                         }
                     }
                 }

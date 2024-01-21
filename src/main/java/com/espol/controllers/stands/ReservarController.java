@@ -83,18 +83,17 @@ public class ReservarController {
                 tablaController.initialize(feria);
                 App.setScreen(root, event);
             } else {
-                
+
                 App.mostrarAlertaError("El emprendedor no debe tener mas de un stand reservado");
-                
+
             }
         } else if (feria.getAuspiciantes().contains(persona)) {
 
             if (validacionStandsAuspiciante(persona, feria)) {
-
-                stand.setPersonaAsignada(personaCmbBox.getValue());
+                stand.setPersonaAsignada(persona);
                 stand.setFechaAsignacion(LocalDate.now());
-                for (AuspicianteEnFeria auspiciante : feria.getAuspiciantes()){
-                    if (auspiciante.equals(persona)){
+                for (AuspicianteEnFeria auspiciante : feria.getAuspiciantes()) {
+                    if (auspiciante.equals(persona)) {
                         auspiciante.setTieneStand(true);
                     }
                 }
@@ -112,7 +111,7 @@ public class ReservarController {
                 App.setScreen(root, event);
             } else {
                 App.mostrarAlertaError("El aupsiciantes no debe tener mas de dos stands reservados");
-                
+
             }
 
         }
@@ -137,12 +136,13 @@ public class ReservarController {
             personaCmbBox.setCellFactory(factory);
             personaCmbBox.setButtonCell(factory.call(null));
             ArrayList<AuspicianteEnFeria> auspiciantesConStand = new ArrayList<>();
-            for (AuspicianteEnFeria auspiciante : feria.getAuspiciantes()){
-                if (auspiciante.getTieneStand()){
+            for (AuspicianteEnFeria auspiciante : feria.getAuspiciantes()) {
+                if (auspiciante.getTieneStand()) {
                     auspiciantesConStand.add(auspiciante);
                 }
             }
-            ObservableList<Persona> observableList = FXCollections.observableArrayList(convertToParentList(auspiciantesConStand));
+            ObservableList<Persona> observableList = FXCollections
+                    .observableArrayList(convertToParentList(auspiciantesConStand));
             personaCmbBox.setItems(observableList);
         } else {
             Callback<ListView<Persona>, ListCell<Persona>> factory = lv -> new ListCell<Persona>() {
@@ -179,7 +179,7 @@ public class ReservarController {
         int conteoStands = 0;
         for (Seccion seccion : feria.getSecciones()) {
             for (Stand stand : seccion.getStands()) {
-                if (stand.getPersonaAsignada()!=null && stand.getPersonaAsignada().equals(persona)) {
+                if (stand.getPersonaAsignada() != null && stand.getPersonaAsignada().equals(persona)) {
                     conteoStands++;
                 }
             }
