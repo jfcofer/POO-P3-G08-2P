@@ -95,7 +95,7 @@ public class EditarController {
                 seccion.addStands(numStandsNuevo - numStandsOriginal);
             } else if (numStandsOriginal > numStandsNuevo) {
                 Optional<ButtonType> result = App
-                        .mostrarAlertaAdvert("Seguro que desea borrar los stands de la seccion "+seccion.getId()"?\nSe perera toda la informacion");
+                        .mostrarAlertaAdvert("Seguro que desea borrar los stands de la seccion "+seccion.getId()+"?\nSe perdera toda la informacion");
                 if (!result.isPresent()) {
 
                 } else if (result.get() == ButtonType.OK) {

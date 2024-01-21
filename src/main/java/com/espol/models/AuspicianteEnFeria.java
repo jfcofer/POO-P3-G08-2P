@@ -21,7 +21,7 @@ public class AuspicianteEnFeria extends Auspiciante {
         this.descripcion = descripcion;
     }
 
-    public boolean isTieneStand() {
+    public boolean getTieneStand() {
         return tieneStand;
     }
 

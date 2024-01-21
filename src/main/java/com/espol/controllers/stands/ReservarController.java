@@ -56,13 +56,20 @@ public class ReservarController {
 
     @FXML
     void handleReservarButtonAction(ActionEvent event) {
-        if (App.datos.getEmprendedores().contains(personaCmbBox.getValue())) {
-            Emprendedor emprendedor = (Emprendedor) personaCmbBox.getValue();
-            if (conteoEmprendedor(emprendedor, feria) >= 2) {
-                App.mostrarAlertaError("El emprendedor no debe tener mas de dos stands reservados");
-            } else {
+        Persona persona = personaCmbBox.getValue();
+        if (App.datos.getEmprendedores().contains(persona)) {
+            /*
+             * Si la persona elegida es Emprendedor, para aplicar el conteo de stands
+             */
+            Emprendedor emprendedor = (Emprendedor) persona;
+
+            /*
+             * Revisar conteo de emprendedor
+             */
+            if (validacionStandsEmprendedor(emprendedor, feria)) {
                 stand.setPersonaAsignada(personaCmbBox.getValue());
                 stand.setFechaAsignacion(LocalDate.now());
+                feria.getEmprendedores().add(emprendedor);
                 App.datos.generarArchivo();
                 FXMLLoader loader = App.getLoader("stands/tabla");
                 Parent root = null;
@@ -75,23 +82,38 @@ public class ReservarController {
                 TablaController tablaController = loader.getController();
                 tablaController.initialize(feria);
                 App.setScreen(root, event);
+            } else {
+                
+                App.mostrarAlertaError("El emprendedor no debe tener mas de un stand reservado");
+                
+            }
+        } else if (feria.getAuspiciantes().contains(persona)) {
 
+            if (validacionStandsAuspiciante(persona, feria)) {
+
+                stand.setPersonaAsignada(personaCmbBox.getValue());
+                stand.setFechaAsignacion(LocalDate.now());
+                for (AuspicianteEnFeria auspiciante : feria.getAuspiciantes()){
+                    if (auspiciante.equals(persona)){
+                        auspiciante.setTieneStand(true);
+                    }
+                }
+                App.datos.generarArchivo();
+                FXMLLoader loader = App.getLoader("stands/tabla");
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (Exception e) {
+                    App.setScreen("error", event);
+                    e.printStackTrace();
+                }
+                TablaController tablaController = loader.getController();
+                tablaController.initialize(feria);
+                App.setScreen(root, event);
+            } else {
+                App.mostrarAlertaError("El aupsiciantes no debe tener mas de dos stands reservados");
+                
             }
-        } else {
-            stand.setPersonaAsignada(personaCmbBox.getValue());
-            stand.setFechaAsignacion(LocalDate.now());
-            App.datos.generarArchivo();
-            FXMLLoader loader = App.getLoader("stands/tabla");
-            Parent root = null;
-            try {
-                root = loader.load();
-            } catch (Exception e) {
-                App.setScreen("error", event);
-                e.printStackTrace();
-            }
-            TablaController tablaController = loader.getController();
-            tablaController.initialize(feria);
-            App.setScreen(root, event);
 
         }
     }
@@ -114,8 +136,13 @@ public class ReservarController {
             };
             personaCmbBox.setCellFactory(factory);
             personaCmbBox.setButtonCell(factory.call(null));
-            ArrayList<Persona> auspiciantes = convertToParentList(feria.getAuspiciantes());
-            ObservableList<Persona> observableList = FXCollections.observableArrayList(auspiciantes);
+            ArrayList<AuspicianteEnFeria> auspiciantesConStand = new ArrayList<>();
+            for (AuspicianteEnFeria auspiciante : feria.getAuspiciantes()){
+                if (auspiciante.getTieneStand()){
+                    auspiciantesConStand.add(auspiciante);
+                }
+            }
+            ObservableList<Persona> observableList = FXCollections.observableArrayList(convertToParentList(auspiciantesConStand));
             personaCmbBox.setItems(observableList);
         } else {
             Callback<ListView<Persona>, ListCell<Persona>> factory = lv -> new ListCell<Persona>() {
@@ -148,21 +175,30 @@ public class ReservarController {
         return parentList;
     }
 
-    private static int conteoEmprendedor(Emprendedor emprendedor, Feria feria) {
-        int standsEmprendedor = 0;
+    private static int conteoPersona(Persona persona, Feria feria) {
+        int conteoStands = 0;
         for (Seccion seccion : feria.getSecciones()) {
             for (Stand stand : seccion.getStands()) {
-                if (stand.getPersonaAsignada() instanceof Emprendedor) {
-                    Emprendedor personaEmp = (Emprendedor) stand.getPersonaAsignada();
-                    if (personaEmp.equals(emprendedor)) {
-                        standsEmprendedor++;
-                    }
-
+                if (stand.getPersonaAsignada()!=null && stand.getPersonaAsignada().equals(persona)) {
+                    conteoStands++;
                 }
             }
         }
-        return standsEmprendedor;
+        return conteoStands;
     }
 
+    private static boolean validacionStandsAuspiciante(Persona persona, Feria feria) {
+        if (conteoPersona(persona, feria) > 2) {
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean validacionStandsEmprendedor(Persona persona, Feria feria) {
+        if (conteoPersona(persona, feria) > 1) {
+            return false;
+        }
+        return true;
+    }
 
 }
