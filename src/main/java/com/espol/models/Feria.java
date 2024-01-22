@@ -148,6 +148,14 @@ public class Feria implements Serializable {
         }
         return str.toString();
     }
+    
+    public String consultarAuspiciantes() {
+        StringBuilder str = new StringBuilder();
+        for (Auspiciante auspiciante : auspiciantes) {
+            str.append("\n" + auspiciante.toString());
+        }
+        return str.toString();
+    }
 
     public void reservarStand(String codigoStand, Persona persona, LocalDate date) {
         for (Seccion seccion : secciones) {
