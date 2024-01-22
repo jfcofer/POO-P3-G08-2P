@@ -16,7 +16,7 @@
     <children>
       <BorderPane prefHeight="530.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <Label alignment="CENTER" text="Detalles de (NombreFeria)" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" text="Detalles" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

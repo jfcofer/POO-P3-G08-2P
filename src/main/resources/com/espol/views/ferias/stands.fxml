@@ -104,7 +104,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="40.0" prefWidth="645.0" spacing="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Volver" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBackButtonAction" text="Volver" />
          </children>
          <padding>
             <Insets bottom="5.0" />
