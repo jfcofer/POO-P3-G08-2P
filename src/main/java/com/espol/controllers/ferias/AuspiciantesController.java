@@ -8,6 +8,8 @@ import com.espol.models.Feria;
 import com.espol.models.Seccion;
 import com.espol.models.Stand;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AuspiciantesController {
 
@@ -48,43 +49,99 @@ public class AuspiciantesController {
 
     @FXML
     public void initialize(Feria feria) {
-        nombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        descColumn.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        tieneStandColumn.setCellValueFactory(new PropertyValueFactory<>("tieneStand"));
-        standAsignadoColumn.setCellValueFactory(new PropertyValueFactory<>("standAsignado"));
+        nombreColumn.setCellValueFactory(cellData -> cellData.getValue().nombreProperty());
+        descColumn.setCellValueFactory(cellData -> cellData.getValue().descripcionProperty());
+        tieneStandColumn.setCellValueFactory(cellData -> cellData.getValue().tieneStandProperty());
+        standAsignadoColumn.setCellValueFactory(cellData -> cellData.getValue().standAsignadoProperty());
 
         ArrayList<AuspicianteTabla> auspiciantes = AuspicianteTabla.generarAuspiciantes(feria);
         ObservableList<AuspicianteTabla> observableListAuspiciantes = FXCollections.observableArrayList(auspiciantes);
         tabla.setItems(observableListAuspiciantes);
 
     }
-    private static class AuspicianteTabla{
-        String nombre;
-        String descripcion;
-        String tieneStand;
-        String standAsignado;
 
-        private AuspicianteTabla(String nombre, String descripcion, String tieneStand, String standAsignado){
-            this.nombre = nombre;
-            this.descripcion = descripcion;
-            this.tieneStand = tieneStand;
-            this.standAsignado = standAsignado;
+    private static class AuspicianteTabla {
+        StringProperty nombre;
+        StringProperty descripcion;
+        StringProperty tieneStand;
+        StringProperty standAsignado;
+
+        public String getNombre() {
+            return nombre.get();
         }
 
-        private static ArrayList<AuspicianteTabla> generarAuspiciantes(Feria feria){
+        public void setNombre(String nombre) {
+            this.nombre = new SimpleStringProperty(nombre);
+        }
+
+        public StringProperty nombreProperty() {
+            return nombre;
+        }
+
+        public String getDescripcion() {
+            return descripcion.get();
+        }
+
+        public void setDescripcion(String descripcion) {
+            this.descripcion = new SimpleStringProperty(descripcion);
+        }
+
+        public StringProperty descripcionProperty() {
+            return descripcion;
+        }
+
+        public String getTieneStand() {
+            return tieneStand.get();
+        }
+
+        public void setTieneStand(String tieneStand) {
+            this.tieneStand = new SimpleStringProperty(tieneStand);
+        }
+
+        public StringProperty tieneStandProperty() {
+            return tieneStand;
+        }
+
+        public String getStandAsignado() {
+            return standAsignado.get();
+        }
+
+        public void setStandAsignado(String standAsignado) {
+            this.standAsignado = new SimpleStringProperty(standAsignado);
+        }
+
+        public StringProperty standAsignadoProperty() {
+            return standAsignado;
+        }
+
+        public AuspicianteTabla(String nombre, String descripcion, String tieneStand, String standAsignado) {
+            this.nombre = new SimpleStringProperty(nombre);
+            this.descripcion = new SimpleStringProperty(descripcion);
+            this.tieneStand = new SimpleStringProperty(tieneStand);
+            this.standAsignado = new SimpleStringProperty(standAsignado);
+        }
+
+        private static ArrayList<AuspicianteTabla> generarAuspiciantes(Feria feria) {
             ArrayList<AuspicianteTabla> arr = new ArrayList<>();
             ArrayList<AuspicianteEnFeria> auspiciantes = feria.getAuspiciantes();
-            for (AuspicianteEnFeria auspiciante : auspiciantes){
-                for (Seccion seccion : feria.getSecciones()){
-                    for (Stand stand : seccion.getStands()){
-                        if (stand.getPersonaAsignada().equals(auspiciante)){
-                            arr.add(new AuspicianteTabla(auspiciante.getNombre(),auspiciante.getDescripcion(),(auspiciante.getTieneStand() ? "Si" : "No"), stand.getCodigo()));
+            for (AuspicianteEnFeria auspiciante : auspiciantes) {
+                if (auspiciante.getTieneStand()) {
+                    for (Seccion seccion : feria.getSecciones()) {
+                        for (Stand stand : seccion.getStands()) {
+                            if (stand.getPersonaAsignada() != null && stand.getPersonaAsignada().equals(auspiciante)) {
+                                arr.add(new AuspicianteTabla(auspiciante.getNombre(), auspiciante.getDescripcion(),
+                                        (auspiciante.getTieneStand() ? "Si" : "No"), stand.getCodigo()));
+                            }
                         }
                     }
+
+                } else {
+                    arr.add(new AuspicianteTabla(auspiciante.getNombre(), auspiciante.getDescripcion(),
+                            (auspiciante.getTieneStand() ? "Si" : "No"), "No tiene"));
                 }
             }
             return arr;
         }
-    } 
+    }
 
 }

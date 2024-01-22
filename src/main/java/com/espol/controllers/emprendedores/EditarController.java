@@ -7,7 +7,6 @@ package com.espol.controllers.emprendedores;
 import com.espol.App;
 import com.espol.models.Emprendedor;
 import com.espol.models.RedSocial;
-import com.espol.models.Sectores;
 import com.espol.models.TipoRedSocial;
 import java.io.IOException;
 import java.util.ArrayList;
