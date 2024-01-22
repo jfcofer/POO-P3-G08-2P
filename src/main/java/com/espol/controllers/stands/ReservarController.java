@@ -190,14 +190,14 @@ public class ReservarController {
     }
 
     private static boolean validacionStandsAuspiciante(Persona persona, Feria feria) {
-        if (conteoPersona(persona, feria) > 2) {
+        if (conteoPersona(persona, feria) >= 2) {
             return false;
         }
         return true;
     }
 
     private static boolean validacionStandsEmprendedor(Persona persona, Feria feria) {
-        if (conteoPersona(persona, feria) > 1) {
+        if (conteoPersona(persona, feria) >= 1) {
             return false;
         }
         return true;

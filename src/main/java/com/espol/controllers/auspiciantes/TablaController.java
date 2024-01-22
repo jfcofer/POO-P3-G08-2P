@@ -11,12 +11,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.TextAlignment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
 
 import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;
 
 public class TablaController {
@@ -70,6 +73,7 @@ public class TablaController {
                     @Override
                     public TableCell<Auspiciante, String> call(TableColumn<Auspiciante, String> param) {
                         return new TableCell<Auspiciante, String>() {
+                            final HBox container = new HBox();
                             final Button btn = new Button("Editar");
 
                             @Override
@@ -78,6 +82,8 @@ public class TablaController {
                                 if (empty) {
                                     setGraphic(null);
                                 } else {
+                                    container.setAlignment(Pos.CENTER);
+                                    btn.setTextAlignment(TextAlignment.CENTER);
                                     btn.setOnAction((ActionEvent event) -> {
                                         Auspiciante auspiciante = getTableView().getItems().get(getIndex());
                                         FXMLLoader loader = App.getLoader("auspiciantes/editar");
@@ -91,7 +97,8 @@ public class TablaController {
                                         editarController.cargarAuspiciante(auspiciante.getRuc());
                                         App.setScreen(root, event);
                                     });
-                                    setGraphic(btn);
+                                    container.getChildren().add(btn);
+                                    setGraphic(container);
                                 }
                             }
                         };

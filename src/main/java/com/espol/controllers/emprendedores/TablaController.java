@@ -81,7 +81,7 @@ public class TablaController {
                                         } catch (IOException ex) {
                                             ex.printStackTrace();
                                         }
-                                        com.espol.controllers.emprendedores.EditarController editarController = loader.getController();
+                                        EditarController editarController = loader.getController();
                                         editarController.cargarEmprendedor(emprendedor.getRuc());
                                         App.setScreen(root, event);
                                     });

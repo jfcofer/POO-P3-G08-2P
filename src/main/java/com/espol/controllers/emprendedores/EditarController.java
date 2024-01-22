@@ -190,17 +190,9 @@ public class EditarController {
             emprendedores.add(emprendedor);
 
             App.datos.setEmprendedores(emprendedores);
+            App.datos.generarArchivo();
             App.mostrarAlertaInfo("La edicion se ha realizado correctamente");
-            FXMLLoader loader = App.getLoader("emprendedors/tabla");
-            Parent root = null;
-            try {
-                root = loader.load();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            com.espol.controllers.emprendedores.TablaController controller = loader.getController();
-            controller.initialize();
-            App.setScreen(root, event);
+            App.setScreen("emprendedores/tabla", event);
         }
     }
 
