@@ -69,7 +69,9 @@ public class ReservarController {
             if (validacionStandsEmprendedor(emprendedor, feria)) {
                 stand.setPersonaAsignada(personaCmbBox.getValue());
                 stand.setFechaAsignacion(LocalDate.now());
-                feria.getEmprendedores().add(emprendedor);
+                if (!feria.getEmprendedores().contains(emprendedor)){
+                    feria.getEmprendedores().add(emprendedor);
+                }
                 App.datos.generarArchivo();
                 FXMLLoader loader = App.getLoader("stands/tabla");
                 Parent root = null;

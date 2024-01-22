@@ -125,20 +125,17 @@ public class AuspiciantesController {
             ArrayList<AuspicianteTabla> arr = new ArrayList<>();
             ArrayList<AuspicianteEnFeria> auspiciantes = feria.getAuspiciantes();
             for (AuspicianteEnFeria auspiciante : auspiciantes) {
-                if (auspiciante.getTieneStand()) {
-                    for (Seccion seccion : feria.getSecciones()) {
-                        for (Stand stand : seccion.getStands()) {
-                            if (stand.getPersonaAsignada() != null && stand.getPersonaAsignada().equals(auspiciante)) {
-                                arr.add(new AuspicianteTabla(auspiciante.getNombre(), auspiciante.getDescripcion(),
-                                        (auspiciante.getTieneStand() ? "Si" : "No"), stand.getCodigo()));
-                            }
+                String codigoStand = "No tiene";
+                for (Seccion seccion : feria.getSecciones()) {
+                    for (Stand stand : seccion.getStands()) {
+                        if (stand.getPersonaAsignada() != null && stand.getPersonaAsignada().equals(auspiciante)) {
+                            codigoStand = stand.getCodigo();
                         }
                     }
-
-                } else {
-                    arr.add(new AuspicianteTabla(auspiciante.getNombre(), auspiciante.getDescripcion(),
-                            (auspiciante.getTieneStand() ? "Si" : "No"), "No tiene"));
                 }
+
+                arr.add(new AuspicianteTabla(auspiciante.getNombre(), auspiciante.getDescripcion(),
+                        auspiciante.getTieneStand() ? "Si" : "No", codigoStand));
             }
             return arr;
         }
