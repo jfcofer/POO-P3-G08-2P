@@ -10,12 +10,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
 
 public class TablaController {
@@ -25,19 +28,19 @@ public class TablaController {
 
     @FXML
     private Button registerButton;
-    
+
     @FXML
     private TableView<Emprendedor> tabla;
     @FXML
     private TableColumn<Emprendedor, String> columnaCedula;
     @FXML
-    private TableColumn<Emprendedor,String> columnaNombre;
+    private TableColumn<Emprendedor, String> columnaNombre;
     @FXML
-    private TableColumn<Emprendedor,String> columnaTelefono;
+    private TableColumn<Emprendedor, String> columnaTelefono;
     @FXML
-    private TableColumn<Emprendedor,String> columnaEmail;
+    private TableColumn<Emprendedor, String> columnaEmail;
     @FXML
-    private TableColumn<Emprendedor,String> columnaOpciones;
+    private TableColumn<Emprendedor, String> columnaOpciones;
 
     @FXML
     public void handleBackButtonAction(ActionEvent event) {
@@ -48,30 +51,34 @@ public class TablaController {
     public void handleRegisterButtonAction(ActionEvent event) {
         App.setScreen("emprendedores/registrar", event);
     }
-    
+
     @FXML
-    public void initialize(){
+    public void initialize() {
         ArrayList<Emprendedor> emprendedores = App.datos.getEmprendedores();
-        
+
         // Definir cómo se llenarán las columnas
         columnaCedula.setCellValueFactory(new PropertyValueFactory<>("ruc"));
         columnaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         columnaTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         columnaEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        
+
         columnaOpciones
                 .setCellFactory(new Callback<TableColumn<Emprendedor, String>, TableCell<Emprendedor, String>>() {
                     @Override
                     public TableCell<Emprendedor, String> call(TableColumn<Emprendedor, String> param) {
                         return new TableCell<Emprendedor, String>() {
-                            final Button btn = new Button("Editar");
-
+                            
                             @Override
                             public void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
                                 if (empty) {
                                     setGraphic(null);
                                 } else {
+                                    final HBox containerButton = new HBox();
+                                    final Button btn = new Button("Editar");
+                                    
+                                    containerButton.setAlignment(Pos.CENTER);
+                                    btn.setTextAlignment(TextAlignment.CENTER);
                                     btn.setOnAction((ActionEvent event) -> {
                                         Emprendedor emprendedor = getTableView().getItems().get(getIndex());
                                         FXMLLoader loader = App.getLoader("emprendedores/editar");
@@ -85,13 +92,14 @@ public class TablaController {
                                         editarController.cargarEmprendedor(emprendedor.getRuc());
                                         App.setScreen(root, event);
                                     });
-                                    setGraphic(btn);
+                                    containerButton.getChildren().add(btn);
+
+                                    setGraphic(containerButton);
                                 }
                             }
                         };
                     }
                 });
-
 
         // Convertir la lista de auspiciantes a una lista observable
         ObservableList<Emprendedor> listaObservable = FXCollections.observableArrayList(emprendedores);

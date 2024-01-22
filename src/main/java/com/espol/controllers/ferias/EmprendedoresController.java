@@ -61,50 +61,19 @@ public class EmprendedoresController {
         StringProperty idSeccion;
         StringProperty codigoStand;
 
-
-        public String getNombre() {
-            return nombre.get();
-        }
-
-        public void setNombre(String nombre) {
-            this.nombre = new SimpleStringProperty(nombre);
-        }
-
-        public StringProperty nombreProperty(){
+        public StringProperty nombreProperty() {
             return nombre;
         }
 
-        public String getDescripcion() {
-            return descripcion.get();
-        }
-
-        public void setDescripcion(String descripcion) {
-            this.descripcion = new SimpleStringProperty(descripcion);
-        }
-
-        public StringProperty descripcionProperty(){
+        public StringProperty descripcionProperty() {
             return descripcion;
         }
 
-        public String getIdSeccion() {
-            return idSeccion.get();
-        }
-
-        public void setIdSeccion(String idSeccion) {
-            this.idSeccion = new SimpleStringProperty(idSeccion);
-        }
-        public StringProperty idSeccionProperty(){
+        public StringProperty idSeccionProperty() {
             return idSeccion;
         }
 
-        public String getCodigoStand() {
-            return codigoStand.get();
-        }
-
-        public void setCodigoStand(String codigoStand) {
-            this.codigoStand = new SimpleStringProperty(codigoStand);
-        }
-        public StringProperty codigoStandProperty(){
+        public StringProperty codigoStandProperty() {
             return codigoStand;
         }
 
@@ -112,7 +81,7 @@ public class EmprendedoresController {
                 String descripcion,
                 String idSeccion,
                 String codigoStand) {
-            this.nombre = new SimpleStringProperty( nombre);
+            this.nombre = new SimpleStringProperty(nombre);
             this.descripcion = new SimpleStringProperty(descripcion);
             this.idSeccion = new SimpleStringProperty(idSeccion);
             this.codigoStand = new SimpleStringProperty(codigoStand);

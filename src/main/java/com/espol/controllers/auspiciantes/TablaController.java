@@ -73,15 +73,15 @@ public class TablaController {
                     @Override
                     public TableCell<Auspiciante, String> call(TableColumn<Auspiciante, String> param) {
                         return new TableCell<Auspiciante, String>() {
-                            final HBox container = new HBox();
-                            final Button btn = new Button("Editar");
-
+                            
                             @Override
                             public void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
                                 if (empty) {
                                     setGraphic(null);
                                 } else {
+                                    final HBox container = new HBox();
+                                    final Button btn = new Button("Editar");
                                     container.setAlignment(Pos.CENTER);
                                     btn.setTextAlignment(TextAlignment.CENTER);
                                     btn.setOnAction((ActionEvent event) -> {

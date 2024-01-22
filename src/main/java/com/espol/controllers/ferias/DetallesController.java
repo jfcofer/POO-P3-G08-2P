@@ -19,11 +19,10 @@ import javafx.scene.control.TextField;
  */
 public class DetallesController {
 
-    private Feria feria;
     /**
      * Initializes the controller class.
      */
-    
+
     @FXML
     private TextField nombreTextField;
     @FXML
@@ -48,7 +47,7 @@ public class DetallesController {
     private TextArea auspiciantesTextArea;
     @FXML
     private TextArea emprendedoresTextArea;
-    
+
     @FXML
     public void initialize(Feria feria) {
         nombreTextField.setText(feria.getNombre());
@@ -63,9 +62,9 @@ public class DetallesController {
         standS4TextField.setText(String.valueOf(feria.getSecciones()[3].getStands().size()));
         auspiciantesTextArea.setText(feria.consultarAuspiciantes());
         emprendedoresTextArea.setText(feria.consultarEmprendedores());
-        
+
     }
-    
+
     @FXML
     private void handleBackButtonAction(ActionEvent event) {
         App.setScreen("ferias/tabla", event);

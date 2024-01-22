@@ -66,48 +66,16 @@ public class AuspiciantesController {
         StringProperty tieneStand;
         StringProperty standAsignado;
 
-        public String getNombre() {
-            return nombre.get();
-        }
-
-        public void setNombre(String nombre) {
-            this.nombre = new SimpleStringProperty(nombre);
-        }
-
         public StringProperty nombreProperty() {
             return nombre;
-        }
-
-        public String getDescripcion() {
-            return descripcion.get();
-        }
-
-        public void setDescripcion(String descripcion) {
-            this.descripcion = new SimpleStringProperty(descripcion);
         }
 
         public StringProperty descripcionProperty() {
             return descripcion;
         }
 
-        public String getTieneStand() {
-            return tieneStand.get();
-        }
-
-        public void setTieneStand(String tieneStand) {
-            this.tieneStand = new SimpleStringProperty(tieneStand);
-        }
-
         public StringProperty tieneStandProperty() {
             return tieneStand;
-        }
-
-        public String getStandAsignado() {
-            return standAsignado.get();
-        }
-
-        public void setStandAsignado(String standAsignado) {
-            this.standAsignado = new SimpleStringProperty(standAsignado);
         }
 
         public StringProperty standAsignadoProperty() {

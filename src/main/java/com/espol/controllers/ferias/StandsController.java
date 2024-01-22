@@ -1,17 +1,14 @@
 package com.espol.controllers.ferias;
 
 import com.espol.App;
-import com.espol.controllers.stands.ReservarController;
+
 import com.espol.models.Feria;
 import com.espol.models.Seccion;
 import com.espol.models.Stand;
-import java.io.IOException;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -23,7 +20,7 @@ public class StandsController {
 
     @FXML
     private Button backButton;
-    
+
     @FXML
     private TextArea infoTxtArea;
 
@@ -40,7 +37,7 @@ public class StandsController {
     private HBox sec4HBox;
 
     @FXML
-    public void initialize(Feria feria){
+    public void initialize(Feria feria) {
         HBox[] HBoxes = { sec1HBox, sec2HBox, sec3HBox, sec4HBox };
         Seccion[] secciones = feria.getSecciones();
         for (int i = 0; i < HBoxes.length; i++) {
@@ -56,12 +53,12 @@ public class StandsController {
                 standVBox.setOnMouseClicked(event -> {
                     infoTxtArea.setText(stand.toString());
                 });
-                
+
                 HBoxes[i].getChildren().add(standVBox);
             }
         }
     }
-    
+
     @FXML
     public void handleBackButtonAction(ActionEvent event) {
         App.setScreen("inicio", event);

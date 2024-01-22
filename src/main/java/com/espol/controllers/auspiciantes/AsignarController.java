@@ -6,7 +6,6 @@ package com.espol.controllers.auspiciantes;
 
 import com.espol.App;
 import com.espol.models.Auspiciante;
-import com.espol.models.AuspicianteEnFeria;
 import com.espol.models.Feria;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
@@ -34,7 +33,7 @@ public class AsignarController {
     @FXML
     private Button btnAsignar;
     @FXML
-    private ComboBox feriasComboBox;
+    private ComboBox<Feria> feriasComboBox;
     @FXML
     private CheckBox standCheckBox;
     @FXML
