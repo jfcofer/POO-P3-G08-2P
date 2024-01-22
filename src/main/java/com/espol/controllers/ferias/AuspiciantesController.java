@@ -1,14 +1,19 @@
 package com.espol.controllers.ferias;
 
+import java.util.ArrayList;
+
 import com.espol.App;
 import com.espol.models.AuspicianteEnFeria;
 import com.espol.models.Feria;
+import com.espol.models.Seccion;
+import com.espol.models.Stand;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -49,7 +54,7 @@ public class AuspiciantesController {
         standAsignadoColumn.setCellValueFactory(new PropertyValueFactory<>("standAsignado"));
 
         ArrayList<AuspicianteTabla> auspiciantes = AuspicianteTabla.generarAuspiciantes(feria);
-        ObservableList<EmprendedorTabla> observableListAuspiciantes = FXCollections.observableArrayList(auspiciantes);
+        ObservableList<AuspicianteTabla> observableListAuspiciantes = FXCollections.observableArrayList(auspiciantes);
         tabla.setItems(observableListAuspiciantes);
 
     }
@@ -66,7 +71,7 @@ public class AuspiciantesController {
             this.standAsignado = standAsignado;
         }
 
-        private static ArrayList<AupsicianteTabla> generarAuspiciantes(Feria feria){
+        private static ArrayList<AuspicianteTabla> generarAuspiciantes(Feria feria){
             ArrayList<AuspicianteTabla> arr = new ArrayList<>();
             ArrayList<AuspicianteEnFeria> auspiciantes = feria.getAuspiciantes();
             for (AuspicianteEnFeria auspiciante : auspiciantes){
