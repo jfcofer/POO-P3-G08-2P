@@ -19,19 +19,19 @@ public class AuspiciantesController {
     private Label titulo;
 
     @FXML
-    private TableView<AuspicianteEnFeria> tabla;
+    private TableView<AuspicianteTabla> tabla;
 
     @FXML
-    private TableColumn<AuspicianteEnFeria, String> nombreColumn;
+    private TableColumn<AuspicianteTabla, String> nombreColumn;
 
     @FXML
-    private TableColumn<AuspicianteEnFeria, String> descColumn;
+    private TableColumn<AuspicianteTabla, String> descColumn;
 
     @FXML
-    private TableColumn<AuspicianteEnFeria, String> tieneStandColumn;
+    private TableColumn<AuspicianteTabla, String> tieneStandColumn;
 
     @FXML
-    private TableColumn<AuspicianteEnFeria, String> standAsignadoColumn;
+    private TableColumn<AuspicianteTabla, String> standAsignadoColumn;
 
     @FXML
     private Button backButton;
@@ -45,18 +45,41 @@ public class AuspiciantesController {
     public void initialize(Feria feria) {
         nombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         descColumn.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        tieneStandColumn.setCellFactory(tableCol -> new TableCell<AuspicianteEnFeria, String>() {
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                boolean tieneStand = tableCol.getTableView().getItems().get(getIndex()).getTieneStand();
-                if (tieneStand) {
-                    setText("Si");
-                } else {
-                    setText("No");
+        tieneStandColumn.setCellValueFactory(new PropertyValueFactory<>("tieneStand"));
+        standAsignadoColumn.setCellValueFactory(new PropertyValueFactory<>("standAsignado"));
+
+        ArrayList<AuspicianteTabla> auspiciantes = AuspicianteTabla.generarAuspiciantes(feria);
+        ObservableList<EmprendedorTabla> observableListAuspiciantes = FXCollections.observableArrayList(auspiciantes);
+        tabla.setItems(observableListAuspiciantes);
+
+    }
+    private static class AuspicianteTabla{
+        String nombre;
+        String descripcion;
+        String tieneStand;
+        String standAsignado;
+
+        private AuspicianteTabla(String nombre, String descripcion, String tieneStand, String standAsignado){
+            this.nombre = nombre;
+            this.descripcion = descripcion;
+            this.tieneStand = tieneStand;
+            this.standAsignado = standAsignado;
+        }
+
+        private static ArrayList<AupsicianteTabla> generarAuspiciantes(Feria feria){
+            ArrayList<AuspicianteTabla> arr = new ArrayList<>();
+            ArrayList<AuspicianteEnFeria> auspiciantes = feria.getAuspiciantes();
+            for (AuspicianteEnFeria auspiciante : auspiciantes){
+                for (Seccion seccion : feria.getSecciones()){
+                    for (Stand stand : seccion.getStands()){
+                        if (stand.getPersonaAsignada().equals(auspiciante)){
+                            arr.add(new AuspicianteTabla(auspiciante.getNombre(),auspiciante.getDescripcion(),(auspiciante.getTieneStand() ? "Si" : "No"), stand.getCodigo()));
+                        }
+                    }
                 }
             }
-        });
-    }
+            return arr;
+        }
+    } 
 
 }

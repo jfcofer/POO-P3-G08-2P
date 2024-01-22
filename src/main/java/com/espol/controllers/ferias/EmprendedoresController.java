@@ -12,28 +12,31 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ListView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class EmprendedoresController {
 
     @FXML
-    private TableView<Emprendedor> tabla;
+    private TableView<EmprendedorTabla> tabla;
 
     @FXML
-    private TableColumn<Emprendedor, String> nombreColumn;
+    private TableColumn<EmprendedorTabla, String> nombreColumn;
 
     @FXML
-    private TableColumn<Emprendedor, String> descColumn;
+    private TableColumn<EmprendedorTabla, String> descColumn;
 
     @FXML
-    private TableColumn<Emprendedor, String> seccionColumn;
+    private TableColumn<EmprendedorTabla, String> seccionColumn;
 
     @FXML
-    private TableColumn<Emprendedor, String> standColumn;
+    private TableColumn<EmprendedorTabla, String> standColumn;
 
     @FXML
     private Button backButton;
@@ -46,28 +49,50 @@ public class EmprendedoresController {
     @FXML
     void initialize(Feria feria) {
         nombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        descColumn.setCellValueFactory(new PropertyValueFactory<>("descripcionServicios"));
-        seccionColumn.setCellFactory(tc -> new TableCell<Emprendedor, String>() {
-            @Override
-            protected void updateItem(String string, boolean empty) {
-                super.updateItem(string, empty);
-                Emprendedor emprendedor = getTableView().getItems().get(getIndex());
-                System.out.println(emprendedor);
-            }
-        });
-        standColumn.setCellFactory(tc -> new TableCell<Emprendedor, String>() {
-            @Override
-            protected void updateItem(String string, boolean empty) {
-                super.updateItem(string, empty);
-                Emprendedor emprendedor = getTableView().getItems().get(getIndex());
-                System.out.println(emprendedor);
+        descColumn.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        seccionColumn.setCellValueFactory(new PropertyValueFactory<>("idSeccion"));
+        standColumn.setCellValueFactory(new PropertyValueFactory<>("codigoStand"));
 
-
-            }
-        });
-        ArrayList<Emprendedor> emprendedores = feria.getEmprendedores();
-        ObservableList<Emprendedor> observableListEmprendedores = FXCollections.observableArrayList(emprendedores);
+        ArrayList<EmprendedorTabla> emprendedores = EmprendedorTabla.generarEmprendedores(feria);
+        ObservableList<EmprendedorTabla> observableListEmprendedores = FXCollections.observableArrayList(emprendedores);
         tabla.setItems(observableListEmprendedores);
+    }
+
+    private static class EmprendedorTabla {
+        String nombre;
+        String descripcion;
+        String idSeccion;
+        String codigoStand;
+
+        private EmprendedorTabla(String nombre,
+                String descripcion,
+                String idSeccion,
+                String codigoStand) {
+            this.nombre = nombre;
+            this.descripcion = descripcion;
+            this.idSeccion = idSeccion;
+            this.codigoStand = codigoStand;
+
+        }
+
+        private static ArrayList<EmprendedorTabla> generarEmprendedores(Feria feria) {
+            ArrayList<EmprendedorTabla> arr = new ArrayList<>();
+            ArrayList<Emprendedor> emprendedores = feria.getEmprendedores();
+            for (Emprendedor emprendedor : emprendedores) {
+                for (Seccion seccion : feria.getSecciones()) {
+                    for (Stand stand : seccion.getStands()) {
+                        if (stand.getPersonaAsignada().equals(emprendedor)) {
+                            arr.add(new EmprendedorTabla(emprendedor.getNombre(), emprendedor.getDescripcionServicios(),
+                                    Integer.toString(seccion.getId()), stand.getCodigo()));
+                        }
+                    }
+                }
+
+            }
+
+            return arr;
+        }
+
     }
 
 }
