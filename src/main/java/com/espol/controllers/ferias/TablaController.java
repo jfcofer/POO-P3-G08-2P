@@ -20,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class TablaController {
@@ -80,7 +81,10 @@ public class TablaController {
             Button auspiciantesButton = new Button("Auspiciantes");
             Button standsButton = new Button("Stands");
             Button editarButton = new Button("Editar");
-            HBox botones = new HBox();
+            HBox botones = new HBox(10);
+            VBox columna1 = new VBox();
+            VBox columna2 = new VBox();
+            
 
             @Override
             protected void updateItem(String string, boolean empty) {
@@ -91,11 +95,13 @@ public class TablaController {
                 } else {
 
                     botones.setAlignment(Pos.CENTER);
-                    detallesButton.setFont(Font.font(8));
-                    auspiciantesButton.setFont(Font.font(8));
-                    emprendedoresButton.setFont(Font.font(8));
-                    standsButton.setFont(Font.font(8));
-                    editarButton.setFont(Font.font(8));
+                    columna1.setAlignment(Pos.CENTER);
+                    columna2.setAlignment(Pos.CENTER);
+                    detallesButton.setPrefSize(100, 20);
+                    auspiciantesButton.setPrefSize(100, 20);
+                    emprendedoresButton.setPrefSize(100, 20);
+                    standsButton.setPrefSize(100, 20);
+                    editarButton.setPrefSize(100, 20);
                     detallesButton.setOnAction(event -> {
                         FXMLLoader loader = App.getLoader("ferias/detalles");
                         Parent root = null;
@@ -166,14 +172,13 @@ public class TablaController {
                         controller.initialize(feria);
                         App.setScreen(root, event);
                     });
-                    botones.getChildren().add(detallesButton);
-                    botones.getChildren().add(emprendedoresButton);
-                    botones.getChildren().add(auspiciantesButton);
-                    botones.getChildren().add(standsButton);
-                    botones.getChildren().add(editarButton);
-
-
-
+                    columna1.getChildren().add(detallesButton);
+                    columna2.getChildren().add(emprendedoresButton);
+                    columna2.getChildren().add(auspiciantesButton);
+                    columna1.getChildren().add(standsButton);
+                    columna1.getChildren().add(editarButton);
+                    botones.getChildren().add(columna1);
+                    botones.getChildren().add(columna2);
                     setGraphic(botones);
                     setText(null);
                 }
